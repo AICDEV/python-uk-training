@@ -1,0 +1,30 @@
+{
+    "drinks_s": [
+        "tea",
+        "beer"
+    ],
+    "drinks_t": [
+        "coffee",
+        "milk"
+    ],
+    "isOk": true,
+    "mean": 12.4,
+    "names": [
+        {
+            "age": 43,
+            "country": "DE"
+        },
+        {
+            "age": 42,
+            "country": "FR"
+        }
+    ],
+    "numbers": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+    ]
+}

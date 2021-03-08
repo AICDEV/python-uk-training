@@ -1,0 +1,79 @@
+select    TRUNC(a.reading_date),
+          a.reading_type,
+          a.reading_source,
+          a.bsc_validation_status,
+          c.sector_id,
+          case when a.created_id like 'CSSRETRY%'      then 'CSS_Retry'
+               when a.created_id like '%CSS%'          then 'CSS'
+               when a.created_id like 'METER_READ_LOG' then 'Estimate'
+               when a.reading_source = 'R' and a.reading_type = 'C' then 'Meter_reader_customer_card'
+               when a.created_id like 'RRD%'           then 'Meter_Reader'
+               when a.reading_source = 'T' and a.reading_type = 'C'              then 'Other Meter reader_customer_card'
+               when a.reading_source = 'T' and a.reading_type = 'R'              then 'Other Meter reader'
+               when a.created_id like 'VDD%'           then 'MOP_Reads'
+               when a.created_id like 'MDB'            then 'PP'
+               when a.created_id like 'DID%'           then 'MOP_Reads'
+               when a.created_id like 'MIDOS%'         then 'Smart'
+               when a.created_id like 'SIC%'           then 'Half_hourly'
+               when a.created_id like 'FWR%'           then 'Other'
+               when a.created_id like 'D0%'            then 'Flows'
+               when a.created_id like '%-%'            then 'CSS'
+               when a.created_id like '%BOT%'          then 'ROBOT'
+               when a.created_id like 'SMEPAYG'        then 'SME_PAYG'
+               when a.created_id like 'SYSCOR'         then 'Other'
+               when a.created_id like 'LNK%'           then 'Estimate'
+               when a.created_id like 'IVRCOS'         then 'IVR_COS'
+               when a.created_id like 'IVR%'           then 'IVR'
+               when a.created_id like '%LTV%'          then 'LTV_deem'
+               when a.created_id like '%DC_CREATE_COS_READ%'           then 'COS_read'
+               when a.created_id like '%AGREED_READ%'  then 'ARD_read'
+               when a.created_id like '%MISSING_READ_COS%'  then 'Missing_COS_read'
+               when a.created_id like 'MOR%'          then 'Meter_reader'
+               else 'Advisor' end user_id,
+          count(distinct b.meter_point_reference)
+
+ 
+
+from      HDS_T_MAD_METER_RGSTR_READING a, Hds_t_Mad_Meter_Register b, gsd_m_current c
+
+ 
+
+where     a.meter_register_id = b.meter_register_id
+and       b.meter_point_reference = c.meter_point_admin_number
+and       TRUNC(a.reading_date) >= '1-JAN-2020'
+and       TRUNC(a.reading_date) < '1-FEB-2021'
+
+ 
+
+group by  TRUNC(a.reading_date),
+          a.reading_type,
+          a.reading_source,
+          a.bsc_validation_status,
+          c.sector_id,
+           case when a.created_id like 'CSSRETRY%'      then 'CSS_Retry'
+               when a.created_id like '%CSS%'          then 'CSS'
+               when a.created_id like 'METER_READ_LOG' then 'Estimate'
+               when a.reading_source = 'R' and a.reading_type = 'C' then 'Meter_reader_customer_card'
+               when a.created_id like 'RRD%'           then 'Meter_Reader'
+               when a.reading_source = 'T' and a.reading_type = 'C'              then 'Other Meter reader_customer_card'
+               when a.reading_source = 'T' and a.reading_type = 'R'              then 'Other Meter reader'
+               when a.created_id like 'VDD%'           then 'MOP_Reads'
+               when a.created_id like 'MDB'            then 'PP'
+               when a.created_id like 'DID%'           then 'MOP_Reads'
+               when a.created_id like 'MIDOS%'         then 'Smart'
+               when a.created_id like 'SIC%'           then 'Half_hourly'
+               when a.created_id like 'FWR%'           then 'Other'
+               when a.created_id like 'D0%'            then 'Flows'
+               when a.created_id like '%-%'            then 'CSS'
+               when a.created_id like '%BOT%'          then 'ROBOT'
+               when a.created_id like 'SMEPAYG'        then 'SME_PAYG'
+               when a.created_id like 'SYSCOR'         then 'Other'
+               when a.created_id like 'LNK%'           then 'Estimate'
+               when a.created_id like 'IVRCOS'         then 'IVR_COS'
+               when a.created_id like 'IVR%'           then 'IVR'
+               when a.created_id like '%LTV%'          then 'LTV_deem'
+               when a.created_id like '%DC_CREATE_COS_READ%'           then 'COS_read'
+               when a.created_id like '%AGREED_READ%'  then 'ARD_read'
+               when a.created_id like '%MISSING_READ_COS%'  then 'Missing_COS_read'
+               when a.created_id like 'MOR%'          then 'Meter_reader'
+               else 'Advisor' end

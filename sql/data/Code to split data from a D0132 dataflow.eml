@@ -1,0 +1,1559 @@
+Received: from AM0PR07MB4945.eurprd07.prod.outlook.com (2603:10a6:208:ef::21)
+ by VI1PR07MB3214.eurprd07.prod.outlook.com with HTTPS; Fri, 19 Feb 2021
+ 14:39:57 +0000
+Received: from AM0PR07MB5315.eurprd07.prod.outlook.com (2603:10a6:208:f2::13)
+ by AM0PR07MB4945.eurprd07.prod.outlook.com (2603:10a6:208:ef::21) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3868.11; Fri, 19 Feb
+ 2021 14:39:57 +0000
+Received: from AM0PR07MB5315.eurprd07.prod.outlook.com
+ ([fe80::c88d:a631:1d06:6d11]) by AM0PR07MB5315.eurprd07.prod.outlook.com
+ ([fe80::c88d:a631:1d06:6d11%5]) with mapi id 15.20.3868.012; Fri, 19 Feb 2021
+ 14:39:56 +0000
+From: "Stacey, Judith" <Dorkes.Judith@eonenergy.com>
+To: "Von Hoven, Victoria" <Victoria.vonhoven@eon-uk.com>
+Subject: Code to split data from a D0132 dataflow
+Thread-Topic: Code to split data from a D0132 dataflow
+Thread-Index: AdcGzRaxDJz+3m+TTZGU+VHHzR3+3A==
+X-MS-Exchange-MessageSentRepresentingType: 1
+Date: Fri, 19 Feb 2021 15:39:56 +0100
+Message-ID:
+	<AM0PR07MB5315E7C33CBFA6433ACCA0DAF7849@AM0PR07MB5315.eurprd07.prod.outlook.com>
+Accept-Language: en-GB, en-US
+Content-Language: en-US
+X-MS-Exchange-Organization-AuthMechanism: 04
+X-MS-Exchange-Organization-AuthSource: AM0PR07MB5315.eurprd07.prod.outlook.com
+X-MS-Has-Attach:
+X-MS-Exchange-Organization-Network-Message-Id:
+	89871e27-e601-426f-a976-08d8d4e43a2c
+X-MS-TNEF-Correlator:
+X-MS-Exchange-Organization-RecordReviewCfmType: 0
+x-ms-publictraffictype: Email
+authentication-results: eon-uk.com; dkim=none (message not signed)
+ header.d=none;eon-uk.com; dmarc=none action=none header.from=eonenergy.com;
+x-originating-ip: [80.1.223.102]
+x-ms-office365-filtering-correlation-id: 89871e27-e601-426f-a976-08d8d4e43a2c
+x-ms-traffictypediagnostic: AM0PR07MB4945:
+x-ms-oob-tlc-oobclassifiers: OLM:655;
+x-ms-exchange-antispam-messagedata:
+	=?Windows-1252?Q?a3+wh+0U5imzG8nej6EwDu/Q0qIvmUgEE/klcAsGFlT+HM0gVcgXmFIA?=
+ =?Windows-1252?Q?yKTIyqzsAxlEJXw8Km0CkY01aYRN/fOaipWL0Nt3mT9DSRIuoKWvGLNa?=
+ =?Windows-1252?Q?pOD7eG+rd2iYjvmE6KTfCQ7X5+UWJC0vNuWIWKcBENhgHH250uXPh/f2?=
+ =?Windows-1252?Q?2IBzyuuuNIDWQ6+WRNePVBvbbQyI23t0VrPryD+q9yzQdszM7QupZ4I8?=
+ =?Windows-1252?Q?rt94J2ALR5o4k/e+jsiwSjRsYlsWh5ny+0qoA0qo+iys7MbOYs2K9xH8?=
+ =?Windows-1252?Q?nwmRSa4CGiaMlkpKM0QXmCW8q7HZKvK1J/2MIoOS6Sajc8fYSXgpGjAe?=
+ =?Windows-1252?Q?JKPG52Xzcpf54aPic2fOJLeXRBtWL9wAToi6SKA0wsal+jXKXDf1sDmf?=
+ =?Windows-1252?Q?evIlLmddGGKcc8Ay7jHerW80xxqpP8a/7Z7e/sWgSX7YPz/4R0wqAgao?=
+ =?Windows-1252?Q?R6RHgYNYkul8ZtZBps0vZkhhZsHMWmdTL6ODZNTDXBB4uYrxGkQSWaAC?=
+ =?Windows-1252?Q?2Nae0f4tcLVvkBa8d/08WemCtO0uo1D0cGkRIdp/f7Xxw8xHHodPA82k?=
+ =?Windows-1252?Q?jNlNBmnqF1k8YnPuCKYOcjDzTvMONbldmXDgy2WhvwPmRyhDeg2v4WON?=
+ =?Windows-1252?Q?HJ2DT1Qls5rrrFa7Xm9aDB9P2lGUIEGDI8ZyjgFesE+XHBunrO3k9E1M?=
+ =?Windows-1252?Q?W4rapDYTvlAwprX4lFknB+6pciTpGZTH0qsdxWmzT1YlT7YPpXbG2fQD?=
+ =?Windows-1252?Q?6vFIcgPSm21UBOobuowonDSmI123eUdNa33HEm9BrnFFW6BGdiNztxYc?=
+ =?Windows-1252?Q?DxwN8CyfLbfa7juBf8BkKBQsT0hG46WWMHxi9PNntSOZwrmgWcCF8I+w?=
+ =?Windows-1252?Q?Iv3IZBzjQgCoNGhaBObARRDQJt2DaMmVlLMGqUhaLSAHLvgDd+sWsOhq?=
+ =?Windows-1252?Q?YsNZO+nWD7MwQ0hjEkBGh5QNAmV66boRPKX8yYVjPQDPnmR2hGG85hZH?=
+ =?Windows-1252?Q?idZ30dZHwqdpKryHSn3UgZIcnPEA29Yh1x43QHBzDEguMrm4VtoXXB8N?=
+ =?Windows-1252?Q?2x8BHdL1BV0Z5XbXtzicNze8fnJKD1h7Um0yX2f7xqz6NLNiTbGQdGge?=
+ =?Windows-1252?Q?/21TKZtfkKyQlwFyxe2xXQbvrrnnG7PtbtKbGEUIDPMC//Gn0jOAOFRS?=
+ =?Windows-1252?Q?LVf+4KkwLiS/Urb5ImE8JMBCpcmUY/q2wFQHJCd9yi+9rHCDROP3A+gd?=
+ =?Windows-1252?Q?G5Z9a59BzHKmC3P9qwtWSkY74so39OdBmD3drzGr3/3GPqkJUDaIUE4m?=
+ =?Windows-1252?Q?EDPKcz4ht+a0AFpFEIEpCuxipvCxfyirNrpFujYBTuvZKrGJjjn+RsoH?=
+ =?Windows-1252?Q?IaddqI89P6HngEl8dQsx03thpjLczBDcyo4=3D?=
+x-ms-exchange-transport-crosstenantheadersstamped: AM0PR07MB4945
+x-forefront-antispam-report:
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:-1;SRV:;IPV:NLI;SFV:SKI;H:AM0PR07MB5315.eurprd07.prod.outlook.com;PTR:;CAT:NONE;SFS:;DIR:INB;
+x-ms-exchange-atpmessageproperties: SA|SL
+x-microsoft-antispam: BCL:0;
+x-ms-exchange-crosstenant-originalarrivaltime: 19 Feb 2021 14:39:56.5363 (UTC)
+x-ms-exchange-crosstenant-network-message-id:
+	89871e27-e601-426f-a976-08d8d4e43a2c
+x-ms-exchange-crosstenant-id: b914a242-e718-443b-a47c-6b4c649d8c0a
+x-ms-exchange-crosstenant-authsource: AM0PR07MB5315.eurprd07.prod.outlook.com
+x-ms-exchange-crosstenant-authas: Internal
+x-ms-exchange-crosstenant-fromentityheader: Hosted
+x-ms-exchange-transport-endtoendlatency: 00:00:01.3357302
+x-ms-exchange-crosstenant-mailboxtype: HOSTED
+x-ms-exchange-crosstenant-userprincipalname:
+	2gbE5xXNunLAla2OMQZyqEOMcmss/T+/0++GEK1Br8ei9wZvIchxIPN8A9zQ1GK/
+x-ms-exchange-processed-by-bccfoldering: 15.20.3868.025
+X-Microsoft-Antispam-Mailbox-Delivery:
+	ucf:0;jmr:0;auth:0;dest:I;ENG:(750129)(520011016)(706158)(944506458)(944626604);
+X-Microsoft-Antispam-Message-Info:
+	rijCgM83phhC5rBHxnjiLUIW9zkxqCCLY96wZkSCEEWsLAWLGkPPii/zuosayk435B9Uvjeok2ec1OM0qWOA/9MLZhMDd+7vcV7FR6YSffk97/rY/EsTw6qms45utZb0YcND+VYQrZIBReUOs1g5I6oU/QUJvt2L1VTgnB79YsMn4lDBm7AtpO2g2U7apkuT4AYGMzER/LhG9+mNT0LDuCHVduSA67DilayUoL5WbHtGbufqksKXi4k310eBjfK5HFvUDp6kyuYOnMlSJ/SupYzjGkCUIDDcwBc72a2yhk7ytFqmnnKJDzV2jZbQnoWS7ylS2aTm6gQ16fdIaI/GWJqDTt1izeWx8wadVmK99aZxBYMI0uV+bdoPCw13fW8t72ChbXtV0dvj/TqOiL+hIkUoe+eWYu+p7pPrqvT02sCcfsVmkthYiSb6k7UOW4BTMRY0uLbCW7yRURHVbfYWarUV0IjRu2OdqPVJqIdnxtC+JXoM1fmiW7HEykBRTt8PPkr8hbCKN9IOBtnRtHC9HIrEZaW0TARuR3W00OXbpZChERcqMgioAbatjAFoyxuyYaTvW2axbtwAtCgxG6HsCKqAlLFaeJX8K2cKHTqgBsLaXTIArSGcCVOaA2T1x6Sb
+Content-Type: multipart/alternative;
+	boundary="_000_AM0PR07MB5315E7C33CBFA6433ACCA0DAF7849AM0PR07MB5315eurp_"
+MIME-Version: 1.0
+
+--_000_AM0PR07MB5315E7C33CBFA6433ACCA0DAF7849AM0PR07MB5315eurp_
+Content-Type: text/plain; charset="Windows-1252"
+Content-Transfer-Encoding: quoted-printable
+
+
+
+CREATE TABLE J4006.d0132_CHASE AS
+
+select      A.MPAN
+
+          , to_date(substr(B.flow_date, 1, 8), 'YYYYMMDD') flow_date
+
+          , B.FILE_ID
+
+          , B.FLOW_TYPE
+
+          , B.FROM_MARKET_PARTICIPANT
+
+          , b.from_role_code
+
+          , B.TO_MARKET_PARTICIPANT
+
+          , b.to_role_code
+
+          , A.FLOW_DATA
+
+          , to_char (SUBSTR(A.FLOW_DATA, INSTR(A.FLOW_DATA,'|',1,2) + 1, IN=
+STR(A.FLOW_DATA,'|',1,3)- INSTR(A.FLOW_DATA,'|',1,2)-1)) DISCON_TYPE
+
+          , to_char (SUBSTR(A.FLOW_DATA, INSTR(A.FLOW_DATA,'|',1,3) + 1, IN=
+STR(A.FLOW_DATA,'|',1,4)- INSTR(A.FLOW_DATA,'|',1,3)-1)) DETAIL
+
+          , to_char (SUBSTR(A.FLOW_DATA, INSTR(A.FLOW_DATA,'|',1,13) + 1, I=
+NSTR(A.FLOW_DATA,'|',1,14)- INSTR(A.FLOW_DATA,'|',1,13)-1)) DISCON_DATE
+
+          , to_char (SUBSTR(A.FLOW_DATA, INSTR(A.FLOW_DATA,'|',1,16) + 1, I=
+NSTR(A.FLOW_DATA,'|',1,17)- INSTR(A.FLOW_DATA,'|',1,16)-1)) ENERGISATION_ST=
+ATUS
+
+          , to_char (SUBSTR(A.FLOW_DATA, INSTR(A.FLOW_DATA,'|',1,17) + 1, I=
+NSTR(A.FLOW_DATA,'|',1,18)- INSTR(A.FLOW_DATA,'|',1,17)-1)) CONTACT
+
+          , to_char (SUBSTR(A.FLOW_DATA, INSTR(A.FLOW_DATA,'|',1,18) + 1, I=
+NSTR(A.FLOW_DATA,'|',1,19)- INSTR(A.FLOW_DATA,'|',1,18)-1)) METER_LOCATION
+
+          , to_char (SUBSTR(A.FLOW_DATA, INSTR(A.FLOW_DATA,'|',1,19) + 1, I=
+NSTR(A.FLOW_DATA,'|',1,20)- INSTR(A.FLOW_DATA,'|',1,19)-1)) NAME
+
+          , to_char (SUBSTR(A.FLOW_DATA, INSTR(A.FLOW_DATA,'|',1,20) + 1, I=
+NSTR(A.FLOW_DATA,'|',1,21)- INSTR(A.FLOW_DATA,'|',1,20)-1)) ADD_1
+
+          , to_char (SUBSTR(A.FLOW_DATA, INSTR(A.FLOW_DATA,'|',1,21) + 1, I=
+NSTR(A.FLOW_DATA,'|',1,22)- INSTR(A.FLOW_DATA,'|',1,21)-1)) ADD_2
+
+          , to_char (SUBSTR(A.FLOW_DATA, INSTR(A.FLOW_DATA,'|',1,22) + 1, I=
+NSTR(A.FLOW_DATA,'|',1,23)- INSTR(A.FLOW_DATA,'|',1,22)-1)) ADD_3
+
+          , to_char (SUBSTR(A.FLOW_DATA, INSTR(A.FLOW_DATA,'|',1,23) + 1, I=
+NSTR(A.FLOW_DATA,'|',1,24)- INSTR(A.FLOW_DATA,'|',1,23)-1)) ADD_4
+
+          , to_char (SUBSTR(A.FLOW_DATA, INSTR(A.FLOW_DATA,'|',1,24) + 1, I=
+NSTR(A.FLOW_DATA,'|',1,25)- INSTR(A.FLOW_DATA,'|',1,24)-1)) ADD_5
+
+          , to_char (SUBSTR(A.FLOW_DATA, INSTR(A.FLOW_DATA,'|',1,25) + 1, I=
+NSTR(A.FLOW_DATA,'|',1,26)- INSTR(A.FLOW_DATA,'|',1,25)-1)) ADD_6
+
+          , to_char (SUBSTR(A.FLOW_DATA, INSTR(A.FLOW_DATA,'|',1,26) + 1, I=
+NSTR(A.FLOW_DATA,'|',1,27)- INSTR(A.FLOW_DATA,'|',1,26)-1)) ADD_7
+
+          , to_char (SUBSTR(A.FLOW_DATA, INSTR(A.FLOW_DATA,'|',1,27) + 1, I=
+NSTR(A.FLOW_DATA,'|',1,28)- INSTR(A.FLOW_DATA,'|',1,27)-1)) ADD_8
+
+          , to_char (SUBSTR(A.FLOW_DATA, INSTR(A.FLOW_DATA,'|',1,28) + 1, I=
+NSTR(A.FLOW_DATA,'|',1,29)- INSTR(A.FLOW_DATA,'|',1,28)-1)) ADD_9
+
+          , to_char (SUBSTR(A.FLOW_DATA, INSTR(A.FLOW_DATA,'|',1,29) + 1, I=
+NSTR(A.FLOW_DATA,'|',1,30)- INSTR(A.FLOW_DATA,'|',1,29)-1)) POST_CODE
+
+From        eman.flow_archive_mpan_data a
+
+Join        EMAN.FLOW_ARCHIVE_FILE b
+
+ON          A.FILENAME =3D B.FILENAME
+
+where       substr(a.filename,3,5) =3D 'D0132'
+
+and         A.DATE_ARCHIVED >=3D '13-JAN-2021'
+
+;
+
+Kind Regards
+
+Judith Stacey
+Business Analyst =96 Operational Insight
+Residential Operations
+
+Mobile 07976 820833
+
+Fax 0115 876 7209
+Email dorkes.judith@eonenergy.com<mailto:dorkes.judith@powergen.co.uk>
+
+E.ON Energy Solutions Limited
+Newstead Court
+
+Little Oak Drive
+
+Annesley
+Nottinghamshire
+
+NG15 0DR
+www.eon-uk.com<https://eur01.safelinks.protection.outlook.com/?url=3Dhttp%3=
+A%2F%2Fwww.eon-uk.com%2F&data=3D04%7C01%7CVictoria.vonhoven%40eon-uk.com%7C=
+89871e27e601426fa97608d8d4e43a2c%7Cb914a242e718443ba47c6b4c649d8c0a%7C0%7C0=
+%7C637493423980929021%7CUnknown%7CTWFpbGZsb3d8eyJWIjoiMC4wLjAwMDAiLCJQIjoiV=
+2luMzIiLCJBTiI6Ik1haWwiLCJXVCI6Mn0%3D%7C1000&sdata=3DVxH8MofHXoKA7Pvj32VmLM=
+nc5d2n0FkDlnezMj2vPW0%3D&reserved=3D0>
+
+
+
+
+--_000_AM0PR07MB5315E7C33CBFA6433ACCA0DAF7849AM0PR07MB5315eurp_
+Content-Type: text/html; charset="Windows-1252"
+Content-Transfer-Encoding: quoted-printable
+
+<html xmlns:v=3D"urn:schemas-microsoft-com:vml" xmlns:o=3D"urn:schemas-micr=
+osoft-com:office:office" xmlns:w=3D"urn:schemas-microsoft-com:office:word" =
+xmlns:m=3D"http://schemas.microsoft.com/office/2004/12/omml" xmlns=3D"http:=
+//www.w3.org/TR/REC-html40">
+<head>
+<meta http-equiv=3D"Content-Type" content=3D"text/html; charset=3DWindows-1=
+252">
+<meta name=3D"Generator" content=3D"Microsoft Word 15 (filtered medium)">
+<style><!--
+/* Font Definitions */
+@font-face
+	{font-family:"Cambria Math";
+	panose-1:2 4 5 3 5 4 6 3 2 4;}
+@font-face
+	{font-family:Calibri;
+	panose-1:2 15 5 2 2 2 4 3 2 4;}
+/* Style Definitions */
+p.MsoNormal, li.MsoNormal, div.MsoNormal
+	{margin:0cm;
+	margin-bottom:.0001pt;
+	font-size:11.0pt;
+	font-family:"Calibri",sans-serif;
+	mso-fareast-language:EN-US;}
+a:link, span.MsoHyperlink
+	{mso-style-priority:99;
+	color:#0563C1;
+	text-decoration:underline;}
+a:visited, span.MsoHyperlinkFollowed
+	{mso-style-priority:99;
+	color:#954F72;
+	text-decoration:underline;}
+span.EmailStyle17
+	{mso-style-type:personal-compose;
+	font-family:"Calibri",sans-serif;
+	color:windowtext;}
+.MsoChpDefault
+	{mso-style-type:export-only;
+	font-family:"Calibri",sans-serif;
+	mso-fareast-language:EN-US;}
+@page WordSection1
+	{size:612.0pt 792.0pt;
+	margin:72.0pt 72.0pt 72.0pt 72.0pt;}
+div.WordSection1
+	{page:WordSection1;}
+--></style><!--[if gte mso 9]><xml>
+<o:shapedefaults v:ext=3D"edit" spidmax=3D"1026" />
+</xml><![endif]--><!--[if gte mso 9]><xml>
+<o:shapelayout v:ext=3D"edit">
+<o:idmap v:ext=3D"edit" data=3D"1" />
+</o:shapelayout></xml><![endif]-->
+</head>
+<body lang=3D"EN-GB" link=3D"#0563C1" vlink=3D"#954F72">
+<div class=3D"WordSection1">
+<p class=3D"MsoNormal"><o:p>&nbsp;</o:p></p>
+<p class=3D"MsoNormal" style=3D"text-autospace:none"><span lang=3D"EN-US" s=
+tyle=3D"font-size:10.0pt;font-family:&quot;Courier New&quot;;color:teal;bac=
+kground:white;mso-highlight:white">CREATE</span><span lang=3D"EN-US" style=
+=3D"font-size:10.0pt;font-family:&quot;Courier New&quot;;color:navy;backgro=
+und:white;mso-highlight:white">
+</span><span lang=3D"EN-US" style=3D"font-size:10.0pt;font-family:&quot;Cou=
+rier New&quot;;color:teal;background:white;mso-highlight:white">TABLE</span=
+><span lang=3D"EN-US" style=3D"font-size:10.0pt;font-family:&quot;Courier N=
+ew&quot;;color:navy;background:white;mso-highlight:white"> J4006.d0132_CHAS=
+E
+</span><span lang=3D"EN-US" style=3D"font-size:10.0pt;font-family:&quot;Cou=
+rier New&quot;;color:teal;background:white;mso-highlight:white">AS</span><s=
+pan lang=3D"EN-US" style=3D"font-size:10.0pt;font-family:&quot;Courier New&=
+quot;;color:navy;background:white;mso-highlight:white"><o:p></o:p></span></=
+p>
+<p class=3D"MsoNormal" style=3D"text-autospace:none"><span lang=3D"EN-US" s=
+tyle=3D"font-size:10.0pt;font-family:&quot;Courier New&quot;;color:teal;bac=
+kground:white;mso-highlight:white">select</span><span lang=3D"EN-US" style=
+=3D"font-size:10.0pt;font-family:&quot;Courier New&quot;;color:navy;backgro=
+und:white;mso-highlight:white">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+ A.MPAN<o:p></o:p></span></p>
+<p class=3D"MsoNormal" style=3D"text-autospace:none"><span lang=3D"EN-US" s=
+tyle=3D"font-size:10.0pt;font-family:&quot;Courier New&quot;;color:navy;bac=
+kground:white;mso-highlight:white">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbs=
+p;&nbsp;&nbsp; , to_date(</span><span lang=3D"EN-US" style=3D"font-size:10.=
+0pt;font-family:&quot;Courier New&quot;;color:teal;background:white;mso-hig=
+hlight:white">substr</span><span lang=3D"EN-US" style=3D"font-size:10.0pt;f=
+ont-family:&quot;Courier New&quot;;color:navy;background:white;mso-highligh=
+t:white">(B.flow_date,
+</span><span lang=3D"EN-US" style=3D"font-size:10.0pt;font-family:&quot;Cou=
+rier New&quot;;color:blue;background:white;mso-highlight:white">1</span><sp=
+an lang=3D"EN-US" style=3D"font-size:10.0pt;font-family:&quot;Courier New&q=
+uot;;color:navy;background:white;mso-highlight:white">,
+</span><span lang=3D"EN-US" style=3D"font-size:10.0pt;font-family:&quot;Cou=
+rier New&quot;;color:blue;background:white;mso-highlight:white">8</span><sp=
+an lang=3D"EN-US" style=3D"font-size:10.0pt;font-family:&quot;Courier New&q=
+uot;;color:navy;background:white;mso-highlight:white">),
+</span><span lang=3D"EN-US" style=3D"font-size:10.0pt;font-family:&quot;Cou=
+rier New&quot;;color:blue;background:white;mso-highlight:white">'YYYYMMDD'<=
+/span><span lang=3D"EN-US" style=3D"font-size:10.0pt;font-family:&quot;Cour=
+ier New&quot;;color:navy;background:white;mso-highlight:white">)
+ flow_date<o:p></o:p></span></p>
+<p class=3D"MsoNormal" style=3D"text-autospace:none"><span lang=3D"EN-US" s=
+tyle=3D"font-size:10.0pt;font-family:&quot;Courier New&quot;;color:navy;bac=
+kground:white;mso-highlight:white">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbs=
+p;&nbsp;&nbsp; , B.FILE_ID<o:p></o:p></span></p>
+<p class=3D"MsoNormal" style=3D"text-autospace:none"><span lang=3D"EN-US" s=
+tyle=3D"font-size:10.0pt;font-family:&quot;Courier New&quot;;color:navy;bac=
+kground:white;mso-highlight:white">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbs=
+p;&nbsp;&nbsp; , B.FLOW_TYPE<o:p></o:p></span></p>
+<p class=3D"MsoNormal" style=3D"text-autospace:none"><span lang=3D"EN-US" s=
+tyle=3D"font-size:10.0pt;font-family:&quot;Courier New&quot;;color:navy;bac=
+kground:white;mso-highlight:white">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbs=
+p;&nbsp;&nbsp; , B.FROM_MARKET_PARTICIPANT<o:p></o:p></span></p>
+<p class=3D"MsoNormal" style=3D"text-autospace:none"><span lang=3D"EN-US" s=
+tyle=3D"font-size:10.0pt;font-family:&quot;Courier New&quot;;color:navy;bac=
+kground:white;mso-highlight:white">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbs=
+p;&nbsp;&nbsp; , b.from_role_code<o:p></o:p></span></p>
+<p class=3D"MsoNormal" style=3D"text-autospace:none"><span lang=3D"EN-US" s=
+tyle=3D"font-size:10.0pt;font-family:&quot;Courier New&quot;;color:navy;bac=
+kground:white;mso-highlight:white">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbs=
+p;&nbsp;&nbsp; , B.TO_MARKET_PARTICIPANT<o:p></o:p></span></p>
+<p class=3D"MsoNormal" style=3D"text-autospace:none"><span lang=3D"EN-US" s=
+tyle=3D"font-size:10.0pt;font-family:&quot;Courier New&quot;;color:navy;bac=
+kground:white;mso-highlight:white">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbs=
+p;&nbsp;&nbsp; , b.to_role_code<o:p></o:p></span></p>
+<p class=3D"MsoNormal" style=3D"text-autospace:none"><span lang=3D"EN-US" s=
+tyle=3D"font-size:10.0pt;font-family:&quot;Courier New&quot;;color:navy;bac=
+kground:white;mso-highlight:white">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbs=
+p;&nbsp;&nbsp; , A.FLOW_DATA<o:p></o:p></span></p>
+<p class=3D"MsoNormal" style=3D"text-autospace:none"><span lang=3D"EN-US" s=
+tyle=3D"font-size:10.0pt;font-family:&quot;Courier New&quot;;color:navy;bac=
+kground:white;mso-highlight:white">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbs=
+p;&nbsp;&nbsp; , to_char (</span><span lang=3D"EN-US" style=3D"font-size:10=
+.0pt;font-family:&quot;Courier New&quot;;color:teal;background:white;mso-hi=
+ghlight:white">SUBSTR</span><span lang=3D"EN-US" style=3D"font-size:10.0pt;=
+font-family:&quot;Courier New&quot;;color:navy;background:white;mso-highlig=
+ht:white">(A.FLOW_DATA,
+</span><span lang=3D"EN-US" style=3D"font-size:10.0pt;font-family:&quot;Cou=
+rier New&quot;;color:teal;background:white;mso-highlight:white">INSTR</span=
+><span lang=3D"EN-US" style=3D"font-size:10.0pt;font-family:&quot;Courier N=
+ew&quot;;color:navy;background:white;mso-highlight:white">(A.FLOW_DATA,</sp=
+an><span lang=3D"EN-US" style=3D"font-size:10.0pt;font-family:&quot;Courier=
+ New&quot;;color:blue;background:white;mso-highlight:white">'|'</span><span=
+ lang=3D"EN-US" style=3D"font-size:10.0pt;font-family:&quot;Courier New&quo=
+t;;color:navy;background:white;mso-highlight:white">,</span><span lang=3D"E=
+N-US" style=3D"font-size:10.0pt;font-family:&quot;Courier New&quot;;color:b=
+lue;background:white;mso-highlight:white">1</span><span lang=3D"EN-US" styl=
+e=3D"font-size:10.0pt;font-family:&quot;Courier New&quot;;color:navy;backgr=
+ound:white;mso-highlight:white">,</span><span lang=3D"EN-US" style=3D"font-=
+size:10.0pt;font-family:&quot;Courier New&quot;;color:blue;background:white=
+;mso-highlight:white">2</span><span lang=3D"EN-US" style=3D"font-size:10.0p=
+t;font-family:&quot;Courier New&quot;;color:navy;background:white;mso-highl=
+ight:white">)
+ + </span><span lang=3D"EN-US" style=3D"font-size:10.0pt;font-family:&quot;=
+Courier New&quot;;color:blue;background:white;mso-highlight:white">1</span>=
+<span lang=3D"EN-US" style=3D"font-size:10.0pt;font-family:&quot;Courier Ne=
+w&quot;;color:navy;background:white;mso-highlight:white">,
+</span><span lang=3D"EN-US" style=3D"font-size:10.0pt;font-family:&quot;Cou=
+rier New&quot;;color:teal;background:white;mso-highlight:white">INSTR</span=
+><span lang=3D"EN-US" style=3D"font-size:10.0pt;font-family:&quot;Courier N=
+ew&quot;;color:navy;background:white;mso-highlight:white">(A.FLOW_DATA,</sp=
+an><span lang=3D"EN-US" style=3D"font-size:10.0pt;font-family:&quot;Courier=
+ New&quot;;color:blue;background:white;mso-highlight:white">'|'</span><span=
+ lang=3D"EN-US" style=3D"font-size:10.0pt;font-family:&quot;Courier New&quo=
+t;;color:navy;background:white;mso-highlight:white">,</span><span lang=3D"E=
+N-US" style=3D"font-size:10.0pt;font-family:&quot;Courier New&quot;;color:b=
+lue;background:white;mso-highlight:white">1</span><span lang=3D"EN-US" styl=
+e=3D"font-size:10.0pt;font-family:&quot;Courier New&quot;;color:navy;backgr=
+ound:white;mso-highlight:white">,</span><span lang=3D"EN-US" style=3D"font-=
+size:10.0pt;font-family:&quot;Courier New&quot;;color:blue;background:white=
+;mso-highlight:white">3</span><span lang=3D"EN-US" style=3D"font-size:10.0p=
+t;font-family:&quot;Courier New&quot;;color:navy;background:white;mso-highl=
+ight:white">)-
+</span><span lang=3D"EN-US" style=3D"font-size:10.0pt;font-family:&quot;Cou=
+rier New&quot;;color:teal;background:white;mso-highlight:white">INSTR</span=
+><span lang=3D"EN-US" style=3D"font-size:10.0pt;font-family:&quot;Courier N=
+ew&quot;;color:navy;background:white;mso-highlight:white">(A.FLOW_DATA,</sp=
+an><span lang=3D"EN-US" style=3D"font-size:10.0pt;font-family:&quot;Courier=
+ New&quot;;color:blue;background:white;mso-highlight:white">'|'</span><span=
+ lang=3D"EN-US" style=3D"font-size:10.0pt;font-family:&quot;Courier New&quo=
+t;;color:navy;background:white;mso-highlight:white">,</span><span lang=3D"E=
+N-US" style=3D"font-size:10.0pt;font-family:&quot;Courier New&quot;;color:b=
+lue;background:white;mso-highlight:white">1</span><span lang=3D"EN-US" styl=
+e=3D"font-size:10.0pt;font-family:&quot;Courier New&quot;;color:navy;backgr=
+ound:white;mso-highlight:white">,</span><span lang=3D"EN-US" style=3D"font-=
+size:10.0pt;font-family:&quot;Courier New&quot;;color:blue;background:white=
+;mso-highlight:white">2</span><span lang=3D"EN-US" style=3D"font-size:10.0p=
+t;font-family:&quot;Courier New&quot;;color:navy;background:white;mso-highl=
+ight:white">)-</span><span lang=3D"EN-US" style=3D"font-size:10.0pt;font-fa=
+mily:&quot;Courier New&quot;;color:blue;background:white;mso-highlight:whit=
+e">1</span><span lang=3D"EN-US" style=3D"font-size:10.0pt;font-family:&quot=
+;Courier New&quot;;color:navy;background:white;mso-highlight:white">))
+ DISCON_TYPE<o:p></o:p></span></p>
+<p class=3D"MsoNormal" style=3D"text-autospace:none"><span lang=3D"EN-US" s=
+tyle=3D"font-size:10.0pt;font-family:&quot;Courier New&quot;;color:navy;bac=
+kground:white;mso-highlight:white">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbs=
+p;&nbsp;&nbsp; , to_char (</span><span lang=3D"EN-US" style=3D"font-size:10=
+.0pt;font-family:&quot;Courier New&quot;;color:teal;background:white;mso-hi=
+ghlight:white">SUBSTR</span><span lang=3D"EN-US" style=3D"font-size:10.0pt;=
+font-family:&quot;Courier New&quot;;color:navy;background:white;mso-highlig=
+ht:white">(A.FLOW_DATA,
+</span><span lang=3D"EN-US" style=3D"font-size:10.0pt;font-family:&quot;Cou=
+rier New&quot;;color:teal;background:white;mso-highlight:white">INSTR</span=
+><span lang=3D"EN-US" style=3D"font-size:10.0pt;font-family:&quot;Courier N=
+ew&quot;;color:navy;background:white;mso-highlight:white">(A.FLOW_DATA,</sp=
+an><span lang=3D"EN-US" style=3D"font-size:10.0pt;font-family:&quot;Courier=
+ New&quot;;color:blue;background:white;mso-highlight:white">'|'</span><span=
+ lang=3D"EN-US" style=3D"font-size:10.0pt;font-family:&quot;Courier New&quo=
+t;;color:navy;background:white;mso-highlight:white">,</span><span lang=3D"E=
+N-US" style=3D"font-size:10.0pt;font-family:&quot;Courier New&quot;;color:b=
+lue;background:white;mso-highlight:white">1</span><span lang=3D"EN-US" styl=
+e=3D"font-size:10.0pt;font-family:&quot;Courier New&quot;;color:navy;backgr=
+ound:white;mso-highlight:white">,</span><span lang=3D"EN-US" style=3D"font-=
+size:10.0pt;font-family:&quot;Courier New&quot;;color:blue;background:white=
+;mso-highlight:white">3</span><span lang=3D"EN-US" style=3D"font-size:10.0p=
+t;font-family:&quot;Courier New&quot;;color:navy;background:white;mso-highl=
+ight:white">)
+ + </span><span lang=3D"EN-US" style=3D"font-size:10.0pt;font-family:&quot;=
+Courier New&quot;;color:blue;background:white;mso-highlight:white">1</span>=
+<span lang=3D"EN-US" style=3D"font-size:10.0pt;font-family:&quot;Courier Ne=
+w&quot;;color:navy;background:white;mso-highlight:white">,
+</span><span lang=3D"EN-US" style=3D"font-size:10.0pt;font-family:&quot;Cou=
+rier New&quot;;color:teal;background:white;mso-highlight:white">INSTR</span=
+><span lang=3D"EN-US" style=3D"font-size:10.0pt;font-family:&quot;Courier N=
+ew&quot;;color:navy;background:white;mso-highlight:white">(A.FLOW_DATA,</sp=
+an><span lang=3D"EN-US" style=3D"font-size:10.0pt;font-family:&quot;Courier=
+ New&quot;;color:blue;background:white;mso-highlight:white">'|'</span><span=
+ lang=3D"EN-US" style=3D"font-size:10.0pt;font-family:&quot;Courier New&quo=
+t;;color:navy;background:white;mso-highlight:white">,</span><span lang=3D"E=
+N-US" style=3D"font-size:10.0pt;font-family:&quot;Courier New&quot;;color:b=
+lue;background:white;mso-highlight:white">1</span><span lang=3D"EN-US" styl=
+e=3D"font-size:10.0pt;font-family:&quot;Courier New&quot;;color:navy;backgr=
+ound:white;mso-highlight:white">,</span><span lang=3D"EN-US" style=3D"font-=
+size:10.0pt;font-family:&quot;Courier New&quot;;color:blue;background:white=
+;mso-highlight:white">4</span><span lang=3D"EN-US" style=3D"font-size:10.0p=
+t;font-family:&quot;Courier New&quot;;color:navy;background:white;mso-highl=
+ight:white">)-
+</span><span lang=3D"EN-US" style=3D"font-size:10.0pt;font-family:&quot;Cou=
+rier New&quot;;color:teal;background:white;mso-highlight:white">INSTR</span=
+><span lang=3D"EN-US" style=3D"font-size:10.0pt;font-family:&quot;Courier N=
+ew&quot;;color:navy;background:white;mso-highlight:white">(A.FLOW_DATA,</sp=
+an><span lang=3D"EN-US" style=3D"font-size:10.0pt;font-family:&quot;Courier=
+ New&quot;;color:blue;background:white;mso-highlight:white">'|'</span><span=
+ lang=3D"EN-US" style=3D"font-size:10.0pt;font-family:&quot;Courier New&quo=
+t;;color:navy;background:white;mso-highlight:white">,</span><span lang=3D"E=
+N-US" style=3D"font-size:10.0pt;font-family:&quot;Courier New&quot;;color:b=
+lue;background:white;mso-highlight:white">1</span><span lang=3D"EN-US" styl=
+e=3D"font-size:10.0pt;font-family:&quot;Courier New&quot;;color:navy;backgr=
+ound:white;mso-highlight:white">,</span><span lang=3D"EN-US" style=3D"font-=
+size:10.0pt;font-family:&quot;Courier New&quot;;color:blue;background:white=
+;mso-highlight:white">3</span><span lang=3D"EN-US" style=3D"font-size:10.0p=
+t;font-family:&quot;Courier New&quot;;color:navy;background:white;mso-highl=
+ight:white">)-</span><span lang=3D"EN-US" style=3D"font-size:10.0pt;font-fa=
+mily:&quot;Courier New&quot;;color:blue;background:white;mso-highlight:whit=
+e">1</span><span lang=3D"EN-US" style=3D"font-size:10.0pt;font-family:&quot=
+;Courier New&quot;;color:navy;background:white;mso-highlight:white">))
+ DETAIL<o:p></o:p></span></p>
+<p class=3D"MsoNormal" style=3D"text-autospace:none"><span lang=3D"EN-US" s=
+tyle=3D"font-size:10.0pt;font-family:&quot;Courier New&quot;;color:navy;bac=
+kground:white;mso-highlight:white">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbs=
+p;&nbsp;&nbsp; , to_char (</span><span lang=3D"EN-US" style=3D"font-size:10=
+.0pt;font-family:&quot;Courier New&quot;;color:teal;background:white;mso-hi=
+ghlight:white">SUBSTR</span><span lang=3D"EN-US" style=3D"font-size:10.0pt;=
+font-family:&quot;Courier New&quot;;color:navy;background:white;mso-highlig=
+ht:white">(A.FLOW_DATA,
+</span><span lang=3D"EN-US" style=3D"font-size:10.0pt;font-family:&quot;Cou=
+rier New&quot;;color:teal;background:white;mso-highlight:white">INSTR</span=
+><span lang=3D"EN-US" style=3D"font-size:10.0pt;font-family:&quot;Courier N=
+ew&quot;;color:navy;background:white;mso-highlight:white">(A.FLOW_DATA,</sp=
+an><span lang=3D"EN-US" style=3D"font-size:10.0pt;font-family:&quot;Courier=
+ New&quot;;color:blue;background:white;mso-highlight:white">'|'</span><span=
+ lang=3D"EN-US" style=3D"font-size:10.0pt;font-family:&quot;Courier New&quo=
+t;;color:navy;background:white;mso-highlight:white">,</span><span lang=3D"E=
+N-US" style=3D"font-size:10.0pt;font-family:&quot;Courier New&quot;;color:b=
+lue;background:white;mso-highlight:white">1</span><span lang=3D"EN-US" styl=
+e=3D"font-size:10.0pt;font-family:&quot;Courier New&quot;;color:navy;backgr=
+ound:white;mso-highlight:white">,</span><span lang=3D"EN-US" style=3D"font-=
+size:10.0pt;font-family:&quot;Courier New&quot;;color:blue;background:white=
+;mso-highlight:white">13</span><span lang=3D"EN-US" style=3D"font-size:10.0=
+pt;font-family:&quot;Courier New&quot;;color:navy;background:white;mso-high=
+light:white">)
+ + </span><span lang=3D"EN-US" style=3D"font-size:10.0pt;font-family:&quot;=
+Courier New&quot;;color:blue;background:white;mso-highlight:white">1</span>=
+<span lang=3D"EN-US" style=3D"font-size:10.0pt;font-family:&quot;Courier Ne=
+w&quot;;color:navy;background:white;mso-highlight:white">,
+</span><span lang=3D"EN-US" style=3D"font-size:10.0pt;font-family:&quot;Cou=
+rier New&quot;;color:teal;background:white;mso-highlight:white">INSTR</span=
+><span lang=3D"EN-US" style=3D"font-size:10.0pt;font-family:&quot;Courier N=
+ew&quot;;color:navy;background:white;mso-highlight:white">(A.FLOW_DATA,</sp=
+an><span lang=3D"EN-US" style=3D"font-size:10.0pt;font-family:&quot;Courier=
+ New&quot;;color:blue;background:white;mso-highlight:white">'|'</span><span=
+ lang=3D"EN-US" style=3D"font-size:10.0pt;font-family:&quot;Courier New&quo=
+t;;color:navy;background:white;mso-highlight:white">,</span><span lang=3D"E=
+N-US" style=3D"font-size:10.0pt;font-family:&quot;Courier New&quot;;color:b=
+lue;background:white;mso-highlight:white">1</span><span lang=3D"EN-US" styl=
+e=3D"font-size:10.0pt;font-family:&quot;Courier New&quot;;color:navy;backgr=
+ound:white;mso-highlight:white">,</span><span lang=3D"EN-US" style=3D"font-=
+size:10.0pt;font-family:&quot;Courier New&quot;;color:blue;background:white=
+;mso-highlight:white">14</span><span lang=3D"EN-US" style=3D"font-size:10.0=
+pt;font-family:&quot;Courier New&quot;;color:navy;background:white;mso-high=
+light:white">)-
+</span><span lang=3D"EN-US" style=3D"font-size:10.0pt;font-family:&quot;Cou=
+rier New&quot;;color:teal;background:white;mso-highlight:white">INSTR</span=
+><span lang=3D"EN-US" style=3D"font-size:10.0pt;font-family:&quot;Courier N=
+ew&quot;;color:navy;background:white;mso-highlight:white">(A.FLOW_DATA,</sp=
+an><span lang=3D"EN-US" style=3D"font-size:10.0pt;font-family:&quot;Courier=
+ New&quot;;color:blue;background:white;mso-highlight:white">'|'</span><span=
+ lang=3D"EN-US" style=3D"font-size:10.0pt;font-family:&quot;Courier New&quo=
+t;;color:navy;background:white;mso-highlight:white">,</span><span lang=3D"E=
+N-US" style=3D"font-size:10.0pt;font-family:&quot;Courier New&quot;;color:b=
+lue;background:white;mso-highlight:white">1</span><span lang=3D"EN-US" styl=
+e=3D"font-size:10.0pt;font-family:&quot;Courier New&quot;;color:navy;backgr=
+ound:white;mso-highlight:white">,</span><span lang=3D"EN-US" style=3D"font-=
+size:10.0pt;font-family:&quot;Courier New&quot;;color:blue;background:white=
+;mso-highlight:white">13</span><span lang=3D"EN-US" style=3D"font-size:10.0=
+pt;font-family:&quot;Courier New&quot;;color:navy;background:white;mso-high=
+light:white">)-</span><span lang=3D"EN-US" style=3D"font-size:10.0pt;font-f=
+amily:&quot;Courier New&quot;;color:blue;background:white;mso-highlight:whi=
+te">1</span><span lang=3D"EN-US" style=3D"font-size:10.0pt;font-family:&quo=
+t;Courier New&quot;;color:navy;background:white;mso-highlight:white">))
+ DISCON_DATE<o:p></o:p></span></p>
+<p class=3D"MsoNormal" style=3D"text-autospace:none"><span lang=3D"EN-US" s=
+tyle=3D"font-size:10.0pt;font-family:&quot;Courier New&quot;;color:navy;bac=
+kground:white;mso-highlight:white">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbs=
+p;&nbsp;&nbsp; , to_char (</span><span lang=3D"EN-US" style=3D"font-size:10=
+.0pt;font-family:&quot;Courier New&quot;;color:teal;background:white;mso-hi=
+ghlight:white">SUBSTR</span><span lang=3D"EN-US" style=3D"font-size:10.0pt;=
+font-family:&quot;Courier New&quot;;color:navy;background:white;mso-highlig=
+ht:white">(A.FLOW_DATA,
+</span><span lang=3D"EN-US" style=3D"font-size:10.0pt;font-family:&quot;Cou=
+rier New&quot;;color:teal;background:white;mso-highlight:white">INSTR</span=
+><span lang=3D"EN-US" style=3D"font-size:10.0pt;font-family:&quot;Courier N=
+ew&quot;;color:navy;background:white;mso-highlight:white">(A.FLOW_DATA,</sp=
+an><span lang=3D"EN-US" style=3D"font-size:10.0pt;font-family:&quot;Courier=
+ New&quot;;color:blue;background:white;mso-highlight:white">'|'</span><span=
+ lang=3D"EN-US" style=3D"font-size:10.0pt;font-family:&quot;Courier New&quo=
+t;;color:navy;background:white;mso-highlight:white">,</span><span lang=3D"E=
+N-US" style=3D"font-size:10.0pt;font-family:&quot;Courier New&quot;;color:b=
+lue;background:white;mso-highlight:white">1</span><span lang=3D"EN-US" styl=
+e=3D"font-size:10.0pt;font-family:&quot;Courier New&quot;;color:navy;backgr=
+ound:white;mso-highlight:white">,</span><span lang=3D"EN-US" style=3D"font-=
+size:10.0pt;font-family:&quot;Courier New&quot;;color:blue;background:white=
+;mso-highlight:white">16</span><span lang=3D"EN-US" style=3D"font-size:10.0=
+pt;font-family:&quot;Courier New&quot;;color:navy;background:white;mso-high=
+light:white">)
+ + </span><span lang=3D"EN-US" style=3D"font-size:10.0pt;font-family:&quot;=
+Courier New&quot;;color:blue;background:white;mso-highlight:white">1</span>=
+<span lang=3D"EN-US" style=3D"font-size:10.0pt;font-family:&quot;Courier Ne=
+w&quot;;color:navy;background:white;mso-highlight:white">,
+</span><span lang=3D"EN-US" style=3D"font-size:10.0pt;font-family:&quot;Cou=
+rier New&quot;;color:teal;background:white;mso-highlight:white">INSTR</span=
+><span lang=3D"EN-US" style=3D"font-size:10.0pt;font-family:&quot;Courier N=
+ew&quot;;color:navy;background:white;mso-highlight:white">(A.FLOW_DATA,</sp=
+an><span lang=3D"EN-US" style=3D"font-size:10.0pt;font-family:&quot;Courier=
+ New&quot;;color:blue;background:white;mso-highlight:white">'|'</span><span=
+ lang=3D"EN-US" style=3D"font-size:10.0pt;font-family:&quot;Courier New&quo=
+t;;color:navy;background:white;mso-highlight:white">,</span><span lang=3D"E=
+N-US" style=3D"font-size:10.0pt;font-family:&quot;Courier New&quot;;color:b=
+lue;background:white;mso-highlight:white">1</span><span lang=3D"EN-US" styl=
+e=3D"font-size:10.0pt;font-family:&quot;Courier New&quot;;color:navy;backgr=
+ound:white;mso-highlight:white">,</span><span lang=3D"EN-US" style=3D"font-=
+size:10.0pt;font-family:&quot;Courier New&quot;;color:blue;background:white=
+;mso-highlight:white">17</span><span lang=3D"EN-US" style=3D"font-size:10.0=
+pt;font-family:&quot;Courier New&quot;;color:navy;background:white;mso-high=
+light:white">)-
+</span><span lang=3D"EN-US" style=3D"font-size:10.0pt;font-family:&quot;Cou=
+rier New&quot;;color:teal;background:white;mso-highlight:white">INSTR</span=
+><span lang=3D"EN-US" style=3D"font-size:10.0pt;font-family:&quot;Courier N=
+ew&quot;;color:navy;background:white;mso-highlight:white">(A.FLOW_DATA,</sp=
+an><span lang=3D"EN-US" style=3D"font-size:10.0pt;font-family:&quot;Courier=
+ New&quot;;color:blue;background:white;mso-highlight:white">'|'</span><span=
+ lang=3D"EN-US" style=3D"font-size:10.0pt;font-family:&quot;Courier New&quo=
+t;;color:navy;background:white;mso-highlight:white">,</span><span lang=3D"E=
+N-US" style=3D"font-size:10.0pt;font-family:&quot;Courier New&quot;;color:b=
+lue;background:white;mso-highlight:white">1</span><span lang=3D"EN-US" styl=
+e=3D"font-size:10.0pt;font-family:&quot;Courier New&quot;;color:navy;backgr=
+ound:white;mso-highlight:white">,</span><span lang=3D"EN-US" style=3D"font-=
+size:10.0pt;font-family:&quot;Courier New&quot;;color:blue;background:white=
+;mso-highlight:white">16</span><span lang=3D"EN-US" style=3D"font-size:10.0=
+pt;font-family:&quot;Courier New&quot;;color:navy;background:white;mso-high=
+light:white">)-</span><span lang=3D"EN-US" style=3D"font-size:10.0pt;font-f=
+amily:&quot;Courier New&quot;;color:blue;background:white;mso-highlight:whi=
+te">1</span><span lang=3D"EN-US" style=3D"font-size:10.0pt;font-family:&quo=
+t;Courier New&quot;;color:navy;background:white;mso-highlight:white">))
+ ENERGISATION_STATUS<o:p></o:p></span></p>
+<p class=3D"MsoNormal" style=3D"text-autospace:none"><span lang=3D"EN-US" s=
+tyle=3D"font-size:10.0pt;font-family:&quot;Courier New&quot;;color:navy;bac=
+kground:white;mso-highlight:white">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbs=
+p;&nbsp;&nbsp; , to_char (</span><span lang=3D"EN-US" style=3D"font-size:10=
+.0pt;font-family:&quot;Courier New&quot;;color:teal;background:white;mso-hi=
+ghlight:white">SUBSTR</span><span lang=3D"EN-US" style=3D"font-size:10.0pt;=
+font-family:&quot;Courier New&quot;;color:navy;background:white;mso-highlig=
+ht:white">(A.FLOW_DATA,
+</span><span lang=3D"EN-US" style=3D"font-size:10.0pt;font-family:&quot;Cou=
+rier New&quot;;color:teal;background:white;mso-highlight:white">INSTR</span=
+><span lang=3D"EN-US" style=3D"font-size:10.0pt;font-family:&quot;Courier N=
+ew&quot;;color:navy;background:white;mso-highlight:white">(A.FLOW_DATA,</sp=
+an><span lang=3D"EN-US" style=3D"font-size:10.0pt;font-family:&quot;Courier=
+ New&quot;;color:blue;background:white;mso-highlight:white">'|'</span><span=
+ lang=3D"EN-US" style=3D"font-size:10.0pt;font-family:&quot;Courier New&quo=
+t;;color:navy;background:white;mso-highlight:white">,</span><span lang=3D"E=
+N-US" style=3D"font-size:10.0pt;font-family:&quot;Courier New&quot;;color:b=
+lue;background:white;mso-highlight:white">1</span><span lang=3D"EN-US" styl=
+e=3D"font-size:10.0pt;font-family:&quot;Courier New&quot;;color:navy;backgr=
+ound:white;mso-highlight:white">,</span><span lang=3D"EN-US" style=3D"font-=
+size:10.0pt;font-family:&quot;Courier New&quot;;color:blue;background:white=
+;mso-highlight:white">17</span><span lang=3D"EN-US" style=3D"font-size:10.0=
+pt;font-family:&quot;Courier New&quot;;color:navy;background:white;mso-high=
+light:white">)
+ + </span><span lang=3D"EN-US" style=3D"font-size:10.0pt;font-family:&quot;=
+Courier New&quot;;color:blue;background:white;mso-highlight:white">1</span>=
+<span lang=3D"EN-US" style=3D"font-size:10.0pt;font-family:&quot;Courier Ne=
+w&quot;;color:navy;background:white;mso-highlight:white">,
+</span><span lang=3D"EN-US" style=3D"font-size:10.0pt;font-family:&quot;Cou=
+rier New&quot;;color:teal;background:white;mso-highlight:white">INSTR</span=
+><span lang=3D"EN-US" style=3D"font-size:10.0pt;font-family:&quot;Courier N=
+ew&quot;;color:navy;background:white;mso-highlight:white">(A.FLOW_DATA,</sp=
+an><span lang=3D"EN-US" style=3D"font-size:10.0pt;font-family:&quot;Courier=
+ New&quot;;color:blue;background:white;mso-highlight:white">'|'</span><span=
+ lang=3D"EN-US" style=3D"font-size:10.0pt;font-family:&quot;Courier New&quo=
+t;;color:navy;background:white;mso-highlight:white">,</span><span lang=3D"E=
+N-US" style=3D"font-size:10.0pt;font-family:&quot;Courier New&quot;;color:b=
+lue;background:white;mso-highlight:white">1</span><span lang=3D"EN-US" styl=
+e=3D"font-size:10.0pt;font-family:&quot;Courier New&quot;;color:navy;backgr=
+ound:white;mso-highlight:white">,</span><span lang=3D"EN-US" style=3D"font-=
+size:10.0pt;font-family:&quot;Courier New&quot;;color:blue;background:white=
+;mso-highlight:white">18</span><span lang=3D"EN-US" style=3D"font-size:10.0=
+pt;font-family:&quot;Courier New&quot;;color:navy;background:white;mso-high=
+light:white">)-
+</span><span lang=3D"EN-US" style=3D"font-size:10.0pt;font-family:&quot;Cou=
+rier New&quot;;color:teal;background:white;mso-highlight:white">INSTR</span=
+><span lang=3D"EN-US" style=3D"font-size:10.0pt;font-family:&quot;Courier N=
+ew&quot;;color:navy;background:white;mso-highlight:white">(A.FLOW_DATA,</sp=
+an><span lang=3D"EN-US" style=3D"font-size:10.0pt;font-family:&quot;Courier=
+ New&quot;;color:blue;background:white;mso-highlight:white">'|'</span><span=
+ lang=3D"EN-US" style=3D"font-size:10.0pt;font-family:&quot;Courier New&quo=
+t;;color:navy;background:white;mso-highlight:white">,</span><span lang=3D"E=
+N-US" style=3D"font-size:10.0pt;font-family:&quot;Courier New&quot;;color:b=
+lue;background:white;mso-highlight:white">1</span><span lang=3D"EN-US" styl=
+e=3D"font-size:10.0pt;font-family:&quot;Courier New&quot;;color:navy;backgr=
+ound:white;mso-highlight:white">,</span><span lang=3D"EN-US" style=3D"font-=
+size:10.0pt;font-family:&quot;Courier New&quot;;color:blue;background:white=
+;mso-highlight:white">17</span><span lang=3D"EN-US" style=3D"font-size:10.0=
+pt;font-family:&quot;Courier New&quot;;color:navy;background:white;mso-high=
+light:white">)-</span><span lang=3D"EN-US" style=3D"font-size:10.0pt;font-f=
+amily:&quot;Courier New&quot;;color:blue;background:white;mso-highlight:whi=
+te">1</span><span lang=3D"EN-US" style=3D"font-size:10.0pt;font-family:&quo=
+t;Courier New&quot;;color:navy;background:white;mso-highlight:white">))
+ CONTACT<o:p></o:p></span></p>
+<p class=3D"MsoNormal" style=3D"text-autospace:none"><span lang=3D"EN-US" s=
+tyle=3D"font-size:10.0pt;font-family:&quot;Courier New&quot;;color:navy;bac=
+kground:white;mso-highlight:white">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbs=
+p;&nbsp;&nbsp; , to_char (</span><span lang=3D"EN-US" style=3D"font-size:10=
+.0pt;font-family:&quot;Courier New&quot;;color:teal;background:white;mso-hi=
+ghlight:white">SUBSTR</span><span lang=3D"EN-US" style=3D"font-size:10.0pt;=
+font-family:&quot;Courier New&quot;;color:navy;background:white;mso-highlig=
+ht:white">(A.FLOW_DATA,
+</span><span lang=3D"EN-US" style=3D"font-size:10.0pt;font-family:&quot;Cou=
+rier New&quot;;color:teal;background:white;mso-highlight:white">INSTR</span=
+><span lang=3D"EN-US" style=3D"font-size:10.0pt;font-family:&quot;Courier N=
+ew&quot;;color:navy;background:white;mso-highlight:white">(A.FLOW_DATA,</sp=
+an><span lang=3D"EN-US" style=3D"font-size:10.0pt;font-family:&quot;Courier=
+ New&quot;;color:blue;background:white;mso-highlight:white">'|'</span><span=
+ lang=3D"EN-US" style=3D"font-size:10.0pt;font-family:&quot;Courier New&quo=
+t;;color:navy;background:white;mso-highlight:white">,</span><span lang=3D"E=
+N-US" style=3D"font-size:10.0pt;font-family:&quot;Courier New&quot;;color:b=
+lue;background:white;mso-highlight:white">1</span><span lang=3D"EN-US" styl=
+e=3D"font-size:10.0pt;font-family:&quot;Courier New&quot;;color:navy;backgr=
+ound:white;mso-highlight:white">,</span><span lang=3D"EN-US" style=3D"font-=
+size:10.0pt;font-family:&quot;Courier New&quot;;color:blue;background:white=
+;mso-highlight:white">18</span><span lang=3D"EN-US" style=3D"font-size:10.0=
+pt;font-family:&quot;Courier New&quot;;color:navy;background:white;mso-high=
+light:white">)
+ + </span><span lang=3D"EN-US" style=3D"font-size:10.0pt;font-family:&quot;=
+Courier New&quot;;color:blue;background:white;mso-highlight:white">1</span>=
+<span lang=3D"EN-US" style=3D"font-size:10.0pt;font-family:&quot;Courier Ne=
+w&quot;;color:navy;background:white;mso-highlight:white">,
+</span><span lang=3D"EN-US" style=3D"font-size:10.0pt;font-family:&quot;Cou=
+rier New&quot;;color:teal;background:white;mso-highlight:white">INSTR</span=
+><span lang=3D"EN-US" style=3D"font-size:10.0pt;font-family:&quot;Courier N=
+ew&quot;;color:navy;background:white;mso-highlight:white">(A.FLOW_DATA,</sp=
+an><span lang=3D"EN-US" style=3D"font-size:10.0pt;font-family:&quot;Courier=
+ New&quot;;color:blue;background:white;mso-highlight:white">'|'</span><span=
+ lang=3D"EN-US" style=3D"font-size:10.0pt;font-family:&quot;Courier New&quo=
+t;;color:navy;background:white;mso-highlight:white">,</span><span lang=3D"E=
+N-US" style=3D"font-size:10.0pt;font-family:&quot;Courier New&quot;;color:b=
+lue;background:white;mso-highlight:white">1</span><span lang=3D"EN-US" styl=
+e=3D"font-size:10.0pt;font-family:&quot;Courier New&quot;;color:navy;backgr=
+ound:white;mso-highlight:white">,</span><span lang=3D"EN-US" style=3D"font-=
+size:10.0pt;font-family:&quot;Courier New&quot;;color:blue;background:white=
+;mso-highlight:white">19</span><span lang=3D"EN-US" style=3D"font-size:10.0=
+pt;font-family:&quot;Courier New&quot;;color:navy;background:white;mso-high=
+light:white">)-
+</span><span lang=3D"EN-US" style=3D"font-size:10.0pt;font-family:&quot;Cou=
+rier New&quot;;color:teal;background:white;mso-highlight:white">INSTR</span=
+><span lang=3D"EN-US" style=3D"font-size:10.0pt;font-family:&quot;Courier N=
+ew&quot;;color:navy;background:white;mso-highlight:white">(A.FLOW_DATA,</sp=
+an><span lang=3D"EN-US" style=3D"font-size:10.0pt;font-family:&quot;Courier=
+ New&quot;;color:blue;background:white;mso-highlight:white">'|'</span><span=
+ lang=3D"EN-US" style=3D"font-size:10.0pt;font-family:&quot;Courier New&quo=
+t;;color:navy;background:white;mso-highlight:white">,</span><span lang=3D"E=
+N-US" style=3D"font-size:10.0pt;font-family:&quot;Courier New&quot;;color:b=
+lue;background:white;mso-highlight:white">1</span><span lang=3D"EN-US" styl=
+e=3D"font-size:10.0pt;font-family:&quot;Courier New&quot;;color:navy;backgr=
+ound:white;mso-highlight:white">,</span><span lang=3D"EN-US" style=3D"font-=
+size:10.0pt;font-family:&quot;Courier New&quot;;color:blue;background:white=
+;mso-highlight:white">18</span><span lang=3D"EN-US" style=3D"font-size:10.0=
+pt;font-family:&quot;Courier New&quot;;color:navy;background:white;mso-high=
+light:white">)-</span><span lang=3D"EN-US" style=3D"font-size:10.0pt;font-f=
+amily:&quot;Courier New&quot;;color:blue;background:white;mso-highlight:whi=
+te">1</span><span lang=3D"EN-US" style=3D"font-size:10.0pt;font-family:&quo=
+t;Courier New&quot;;color:navy;background:white;mso-highlight:white">))
+ METER_LOCATION<o:p></o:p></span></p>
+<p class=3D"MsoNormal" style=3D"text-autospace:none"><span lang=3D"EN-US" s=
+tyle=3D"font-size:10.0pt;font-family:&quot;Courier New&quot;;color:navy;bac=
+kground:white;mso-highlight:white">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbs=
+p;&nbsp; &nbsp;, to_char (</span><span lang=3D"EN-US" style=3D"font-size:10=
+.0pt;font-family:&quot;Courier New&quot;;color:teal;background:white;mso-hi=
+ghlight:white">SUBSTR</span><span lang=3D"EN-US" style=3D"font-size:10.0pt;=
+font-family:&quot;Courier New&quot;;color:navy;background:white;mso-highlig=
+ht:white">(A.FLOW_DATA,
+</span><span lang=3D"EN-US" style=3D"font-size:10.0pt;font-family:&quot;Cou=
+rier New&quot;;color:teal;background:white;mso-highlight:white">INSTR</span=
+><span lang=3D"EN-US" style=3D"font-size:10.0pt;font-family:&quot;Courier N=
+ew&quot;;color:navy;background:white;mso-highlight:white">(A.FLOW_DATA,</sp=
+an><span lang=3D"EN-US" style=3D"font-size:10.0pt;font-family:&quot;Courier=
+ New&quot;;color:blue;background:white;mso-highlight:white">'|'</span><span=
+ lang=3D"EN-US" style=3D"font-size:10.0pt;font-family:&quot;Courier New&quo=
+t;;color:navy;background:white;mso-highlight:white">,</span><span lang=3D"E=
+N-US" style=3D"font-size:10.0pt;font-family:&quot;Courier New&quot;;color:b=
+lue;background:white;mso-highlight:white">1</span><span lang=3D"EN-US" styl=
+e=3D"font-size:10.0pt;font-family:&quot;Courier New&quot;;color:navy;backgr=
+ound:white;mso-highlight:white">,</span><span lang=3D"EN-US" style=3D"font-=
+size:10.0pt;font-family:&quot;Courier New&quot;;color:blue;background:white=
+;mso-highlight:white">19</span><span lang=3D"EN-US" style=3D"font-size:10.0=
+pt;font-family:&quot;Courier New&quot;;color:navy;background:white;mso-high=
+light:white">)
+ + </span><span lang=3D"EN-US" style=3D"font-size:10.0pt;font-family:&quot;=
+Courier New&quot;;color:blue;background:white;mso-highlight:white">1</span>=
+<span lang=3D"EN-US" style=3D"font-size:10.0pt;font-family:&quot;Courier Ne=
+w&quot;;color:navy;background:white;mso-highlight:white">,
+</span><span lang=3D"EN-US" style=3D"font-size:10.0pt;font-family:&quot;Cou=
+rier New&quot;;color:teal;background:white;mso-highlight:white">INSTR</span=
+><span lang=3D"EN-US" style=3D"font-size:10.0pt;font-family:&quot;Courier N=
+ew&quot;;color:navy;background:white;mso-highlight:white">(A.FLOW_DATA,</sp=
+an><span lang=3D"EN-US" style=3D"font-size:10.0pt;font-family:&quot;Courier=
+ New&quot;;color:blue;background:white;mso-highlight:white">'|'</span><span=
+ lang=3D"EN-US" style=3D"font-size:10.0pt;font-family:&quot;Courier New&quo=
+t;;color:navy;background:white;mso-highlight:white">,</span><span lang=3D"E=
+N-US" style=3D"font-size:10.0pt;font-family:&quot;Courier New&quot;;color:b=
+lue;background:white;mso-highlight:white">1</span><span lang=3D"EN-US" styl=
+e=3D"font-size:10.0pt;font-family:&quot;Courier New&quot;;color:navy;backgr=
+ound:white;mso-highlight:white">,</span><span lang=3D"EN-US" style=3D"font-=
+size:10.0pt;font-family:&quot;Courier New&quot;;color:blue;background:white=
+;mso-highlight:white">20</span><span lang=3D"EN-US" style=3D"font-size:10.0=
+pt;font-family:&quot;Courier New&quot;;color:navy;background:white;mso-high=
+light:white">)-
+</span><span lang=3D"EN-US" style=3D"font-size:10.0pt;font-family:&quot;Cou=
+rier New&quot;;color:teal;background:white;mso-highlight:white">INSTR</span=
+><span lang=3D"EN-US" style=3D"font-size:10.0pt;font-family:&quot;Courier N=
+ew&quot;;color:navy;background:white;mso-highlight:white">(A.FLOW_DATA,</sp=
+an><span lang=3D"EN-US" style=3D"font-size:10.0pt;font-family:&quot;Courier=
+ New&quot;;color:blue;background:white;mso-highlight:white">'|'</span><span=
+ lang=3D"EN-US" style=3D"font-size:10.0pt;font-family:&quot;Courier New&quo=
+t;;color:navy;background:white;mso-highlight:white">,</span><span lang=3D"E=
+N-US" style=3D"font-size:10.0pt;font-family:&quot;Courier New&quot;;color:b=
+lue;background:white;mso-highlight:white">1</span><span lang=3D"EN-US" styl=
+e=3D"font-size:10.0pt;font-family:&quot;Courier New&quot;;color:navy;backgr=
+ound:white;mso-highlight:white">,</span><span lang=3D"EN-US" style=3D"font-=
+size:10.0pt;font-family:&quot;Courier New&quot;;color:blue;background:white=
+;mso-highlight:white">19</span><span lang=3D"EN-US" style=3D"font-size:10.0=
+pt;font-family:&quot;Courier New&quot;;color:navy;background:white;mso-high=
+light:white">)-</span><span lang=3D"EN-US" style=3D"font-size:10.0pt;font-f=
+amily:&quot;Courier New&quot;;color:blue;background:white;mso-highlight:whi=
+te">1</span><span lang=3D"EN-US" style=3D"font-size:10.0pt;font-family:&quo=
+t;Courier New&quot;;color:navy;background:white;mso-highlight:white">))
+</span><span lang=3D"EN-US" style=3D"font-size:10.0pt;font-family:&quot;Cou=
+rier New&quot;;color:teal;background:white;mso-highlight:white">NAME</span>=
+<span lang=3D"EN-US" style=3D"font-size:10.0pt;font-family:&quot;Courier Ne=
+w&quot;;color:navy;background:white;mso-highlight:white"><o:p></o:p></span>=
+</p>
+<p class=3D"MsoNormal" style=3D"text-autospace:none"><span lang=3D"EN-US" s=
+tyle=3D"font-size:10.0pt;font-family:&quot;Courier New&quot;;color:navy;bac=
+kground:white;mso-highlight:white">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbs=
+p;&nbsp;&nbsp; , to_char (</span><span lang=3D"EN-US" style=3D"font-size:10=
+.0pt;font-family:&quot;Courier New&quot;;color:teal;background:white;mso-hi=
+ghlight:white">SUBSTR</span><span lang=3D"EN-US" style=3D"font-size:10.0pt;=
+font-family:&quot;Courier New&quot;;color:navy;background:white;mso-highlig=
+ht:white">(A.FLOW_DATA,
+</span><span lang=3D"EN-US" style=3D"font-size:10.0pt;font-family:&quot;Cou=
+rier New&quot;;color:teal;background:white;mso-highlight:white">INSTR</span=
+><span lang=3D"EN-US" style=3D"font-size:10.0pt;font-family:&quot;Courier N=
+ew&quot;;color:navy;background:white;mso-highlight:white">(A.FLOW_DATA,</sp=
+an><span lang=3D"EN-US" style=3D"font-size:10.0pt;font-family:&quot;Courier=
+ New&quot;;color:blue;background:white;mso-highlight:white">'|'</span><span=
+ lang=3D"EN-US" style=3D"font-size:10.0pt;font-family:&quot;Courier New&quo=
+t;;color:navy;background:white;mso-highlight:white">,</span><span lang=3D"E=
+N-US" style=3D"font-size:10.0pt;font-family:&quot;Courier New&quot;;color:b=
+lue;background:white;mso-highlight:white">1</span><span lang=3D"EN-US" styl=
+e=3D"font-size:10.0pt;font-family:&quot;Courier New&quot;;color:navy;backgr=
+ound:white;mso-highlight:white">,</span><span lang=3D"EN-US" style=3D"font-=
+size:10.0pt;font-family:&quot;Courier New&quot;;color:blue;background:white=
+;mso-highlight:white">20</span><span lang=3D"EN-US" style=3D"font-size:10.0=
+pt;font-family:&quot;Courier New&quot;;color:navy;background:white;mso-high=
+light:white">)
+ + </span><span lang=3D"EN-US" style=3D"font-size:10.0pt;font-family:&quot;=
+Courier New&quot;;color:blue;background:white;mso-highlight:white">1</span>=
+<span lang=3D"EN-US" style=3D"font-size:10.0pt;font-family:&quot;Courier Ne=
+w&quot;;color:navy;background:white;mso-highlight:white">,
+</span><span lang=3D"EN-US" style=3D"font-size:10.0pt;font-family:&quot;Cou=
+rier New&quot;;color:teal;background:white;mso-highlight:white">INSTR</span=
+><span lang=3D"EN-US" style=3D"font-size:10.0pt;font-family:&quot;Courier N=
+ew&quot;;color:navy;background:white;mso-highlight:white">(A.FLOW_DATA,</sp=
+an><span lang=3D"EN-US" style=3D"font-size:10.0pt;font-family:&quot;Courier=
+ New&quot;;color:blue;background:white;mso-highlight:white">'|'</span><span=
+ lang=3D"EN-US" style=3D"font-size:10.0pt;font-family:&quot;Courier New&quo=
+t;;color:navy;background:white;mso-highlight:white">,</span><span lang=3D"E=
+N-US" style=3D"font-size:10.0pt;font-family:&quot;Courier New&quot;;color:b=
+lue;background:white;mso-highlight:white">1</span><span lang=3D"EN-US" styl=
+e=3D"font-size:10.0pt;font-family:&quot;Courier New&quot;;color:navy;backgr=
+ound:white;mso-highlight:white">,</span><span lang=3D"EN-US" style=3D"font-=
+size:10.0pt;font-family:&quot;Courier New&quot;;color:blue;background:white=
+;mso-highlight:white">21</span><span lang=3D"EN-US" style=3D"font-size:10.0=
+pt;font-family:&quot;Courier New&quot;;color:navy;background:white;mso-high=
+light:white">)-
+</span><span lang=3D"EN-US" style=3D"font-size:10.0pt;font-family:&quot;Cou=
+rier New&quot;;color:teal;background:white;mso-highlight:white">INSTR</span=
+><span lang=3D"EN-US" style=3D"font-size:10.0pt;font-family:&quot;Courier N=
+ew&quot;;color:navy;background:white;mso-highlight:white">(A.FLOW_DATA,</sp=
+an><span lang=3D"EN-US" style=3D"font-size:10.0pt;font-family:&quot;Courier=
+ New&quot;;color:blue;background:white;mso-highlight:white">'|'</span><span=
+ lang=3D"EN-US" style=3D"font-size:10.0pt;font-family:&quot;Courier New&quo=
+t;;color:navy;background:white;mso-highlight:white">,</span><span lang=3D"E=
+N-US" style=3D"font-size:10.0pt;font-family:&quot;Courier New&quot;;color:b=
+lue;background:white;mso-highlight:white">1</span><span lang=3D"EN-US" styl=
+e=3D"font-size:10.0pt;font-family:&quot;Courier New&quot;;color:navy;backgr=
+ound:white;mso-highlight:white">,</span><span lang=3D"EN-US" style=3D"font-=
+size:10.0pt;font-family:&quot;Courier New&quot;;color:blue;background:white=
+;mso-highlight:white">20</span><span lang=3D"EN-US" style=3D"font-size:10.0=
+pt;font-family:&quot;Courier New&quot;;color:navy;background:white;mso-high=
+light:white">)-</span><span lang=3D"EN-US" style=3D"font-size:10.0pt;font-f=
+amily:&quot;Courier New&quot;;color:blue;background:white;mso-highlight:whi=
+te">1</span><span lang=3D"EN-US" style=3D"font-size:10.0pt;font-family:&quo=
+t;Courier New&quot;;color:navy;background:white;mso-highlight:white">))
+ ADD_1<o:p></o:p></span></p>
+<p class=3D"MsoNormal" style=3D"text-autospace:none"><span lang=3D"EN-US" s=
+tyle=3D"font-size:10.0pt;font-family:&quot;Courier New&quot;;color:navy;bac=
+kground:white;mso-highlight:white">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbs=
+p;&nbsp;&nbsp; , to_char (</span><span lang=3D"EN-US" style=3D"font-size:10=
+.0pt;font-family:&quot;Courier New&quot;;color:teal;background:white;mso-hi=
+ghlight:white">SUBSTR</span><span lang=3D"EN-US" style=3D"font-size:10.0pt;=
+font-family:&quot;Courier New&quot;;color:navy;background:white;mso-highlig=
+ht:white">(A.FLOW_DATA,
+</span><span lang=3D"EN-US" style=3D"font-size:10.0pt;font-family:&quot;Cou=
+rier New&quot;;color:teal;background:white;mso-highlight:white">INSTR</span=
+><span lang=3D"EN-US" style=3D"font-size:10.0pt;font-family:&quot;Courier N=
+ew&quot;;color:navy;background:white;mso-highlight:white">(A.FLOW_DATA,</sp=
+an><span lang=3D"EN-US" style=3D"font-size:10.0pt;font-family:&quot;Courier=
+ New&quot;;color:blue;background:white;mso-highlight:white">'|'</span><span=
+ lang=3D"EN-US" style=3D"font-size:10.0pt;font-family:&quot;Courier New&quo=
+t;;color:navy;background:white;mso-highlight:white">,</span><span lang=3D"E=
+N-US" style=3D"font-size:10.0pt;font-family:&quot;Courier New&quot;;color:b=
+lue;background:white;mso-highlight:white">1</span><span lang=3D"EN-US" styl=
+e=3D"font-size:10.0pt;font-family:&quot;Courier New&quot;;color:navy;backgr=
+ound:white;mso-highlight:white">,</span><span lang=3D"EN-US" style=3D"font-=
+size:10.0pt;font-family:&quot;Courier New&quot;;color:blue;background:white=
+;mso-highlight:white">21</span><span lang=3D"EN-US" style=3D"font-size:10.0=
+pt;font-family:&quot;Courier New&quot;;color:navy;background:white;mso-high=
+light:white">)
+ + </span><span lang=3D"EN-US" style=3D"font-size:10.0pt;font-family:&quot;=
+Courier New&quot;;color:blue;background:white;mso-highlight:white">1</span>=
+<span lang=3D"EN-US" style=3D"font-size:10.0pt;font-family:&quot;Courier Ne=
+w&quot;;color:navy;background:white;mso-highlight:white">,
+</span><span lang=3D"EN-US" style=3D"font-size:10.0pt;font-family:&quot;Cou=
+rier New&quot;;color:teal;background:white;mso-highlight:white">INSTR</span=
+><span lang=3D"EN-US" style=3D"font-size:10.0pt;font-family:&quot;Courier N=
+ew&quot;;color:navy;background:white;mso-highlight:white">(A.FLOW_DATA,</sp=
+an><span lang=3D"EN-US" style=3D"font-size:10.0pt;font-family:&quot;Courier=
+ New&quot;;color:blue;background:white;mso-highlight:white">'|'</span><span=
+ lang=3D"EN-US" style=3D"font-size:10.0pt;font-family:&quot;Courier New&quo=
+t;;color:navy;background:white;mso-highlight:white">,</span><span lang=3D"E=
+N-US" style=3D"font-size:10.0pt;font-family:&quot;Courier New&quot;;color:b=
+lue;background:white;mso-highlight:white">1</span><span lang=3D"EN-US" styl=
+e=3D"font-size:10.0pt;font-family:&quot;Courier New&quot;;color:navy;backgr=
+ound:white;mso-highlight:white">,</span><span lang=3D"EN-US" style=3D"font-=
+size:10.0pt;font-family:&quot;Courier New&quot;;color:blue;background:white=
+;mso-highlight:white">22</span><span lang=3D"EN-US" style=3D"font-size:10.0=
+pt;font-family:&quot;Courier New&quot;;color:navy;background:white;mso-high=
+light:white">)-
+</span><span lang=3D"EN-US" style=3D"font-size:10.0pt;font-family:&quot;Cou=
+rier New&quot;;color:teal;background:white;mso-highlight:white">INSTR</span=
+><span lang=3D"EN-US" style=3D"font-size:10.0pt;font-family:&quot;Courier N=
+ew&quot;;color:navy;background:white;mso-highlight:white">(A.FLOW_DATA,</sp=
+an><span lang=3D"EN-US" style=3D"font-size:10.0pt;font-family:&quot;Courier=
+ New&quot;;color:blue;background:white;mso-highlight:white">'|'</span><span=
+ lang=3D"EN-US" style=3D"font-size:10.0pt;font-family:&quot;Courier New&quo=
+t;;color:navy;background:white;mso-highlight:white">,</span><span lang=3D"E=
+N-US" style=3D"font-size:10.0pt;font-family:&quot;Courier New&quot;;color:b=
+lue;background:white;mso-highlight:white">1</span><span lang=3D"EN-US" styl=
+e=3D"font-size:10.0pt;font-family:&quot;Courier New&quot;;color:navy;backgr=
+ound:white;mso-highlight:white">,</span><span lang=3D"EN-US" style=3D"font-=
+size:10.0pt;font-family:&quot;Courier New&quot;;color:blue;background:white=
+;mso-highlight:white">21</span><span lang=3D"EN-US" style=3D"font-size:10.0=
+pt;font-family:&quot;Courier New&quot;;color:navy;background:white;mso-high=
+light:white">)-</span><span lang=3D"EN-US" style=3D"font-size:10.0pt;font-f=
+amily:&quot;Courier New&quot;;color:blue;background:white;mso-highlight:whi=
+te">1</span><span lang=3D"EN-US" style=3D"font-size:10.0pt;font-family:&quo=
+t;Courier New&quot;;color:navy;background:white;mso-highlight:white">))
+ ADD_2<o:p></o:p></span></p>
+<p class=3D"MsoNormal" style=3D"text-autospace:none"><span lang=3D"EN-US" s=
+tyle=3D"font-size:10.0pt;font-family:&quot;Courier New&quot;;color:navy;bac=
+kground:white;mso-highlight:white">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbs=
+p;&nbsp;&nbsp; , to_char (</span><span lang=3D"EN-US" style=3D"font-size:10=
+.0pt;font-family:&quot;Courier New&quot;;color:teal;background:white;mso-hi=
+ghlight:white">SUBSTR</span><span lang=3D"EN-US" style=3D"font-size:10.0pt;=
+font-family:&quot;Courier New&quot;;color:navy;background:white;mso-highlig=
+ht:white">(A.FLOW_DATA,
+</span><span lang=3D"EN-US" style=3D"font-size:10.0pt;font-family:&quot;Cou=
+rier New&quot;;color:teal;background:white;mso-highlight:white">INSTR</span=
+><span lang=3D"EN-US" style=3D"font-size:10.0pt;font-family:&quot;Courier N=
+ew&quot;;color:navy;background:white;mso-highlight:white">(A.FLOW_DATA,</sp=
+an><span lang=3D"EN-US" style=3D"font-size:10.0pt;font-family:&quot;Courier=
+ New&quot;;color:blue;background:white;mso-highlight:white">'|'</span><span=
+ lang=3D"EN-US" style=3D"font-size:10.0pt;font-family:&quot;Courier New&quo=
+t;;color:navy;background:white;mso-highlight:white">,</span><span lang=3D"E=
+N-US" style=3D"font-size:10.0pt;font-family:&quot;Courier New&quot;;color:b=
+lue;background:white;mso-highlight:white">1</span><span lang=3D"EN-US" styl=
+e=3D"font-size:10.0pt;font-family:&quot;Courier New&quot;;color:navy;backgr=
+ound:white;mso-highlight:white">,</span><span lang=3D"EN-US" style=3D"font-=
+size:10.0pt;font-family:&quot;Courier New&quot;;color:blue;background:white=
+;mso-highlight:white">22</span><span lang=3D"EN-US" style=3D"font-size:10.0=
+pt;font-family:&quot;Courier New&quot;;color:navy;background:white;mso-high=
+light:white">)
+ + </span><span lang=3D"EN-US" style=3D"font-size:10.0pt;font-family:&quot;=
+Courier New&quot;;color:blue;background:white;mso-highlight:white">1</span>=
+<span lang=3D"EN-US" style=3D"font-size:10.0pt;font-family:&quot;Courier Ne=
+w&quot;;color:navy;background:white;mso-highlight:white">,
+</span><span lang=3D"EN-US" style=3D"font-size:10.0pt;font-family:&quot;Cou=
+rier New&quot;;color:teal;background:white;mso-highlight:white">INSTR</span=
+><span lang=3D"EN-US" style=3D"font-size:10.0pt;font-family:&quot;Courier N=
+ew&quot;;color:navy;background:white;mso-highlight:white">(A.FLOW_DATA,</sp=
+an><span lang=3D"EN-US" style=3D"font-size:10.0pt;font-family:&quot;Courier=
+ New&quot;;color:blue;background:white;mso-highlight:white">'|'</span><span=
+ lang=3D"EN-US" style=3D"font-size:10.0pt;font-family:&quot;Courier New&quo=
+t;;color:navy;background:white;mso-highlight:white">,</span><span lang=3D"E=
+N-US" style=3D"font-size:10.0pt;font-family:&quot;Courier New&quot;;color:b=
+lue;background:white;mso-highlight:white">1</span><span lang=3D"EN-US" styl=
+e=3D"font-size:10.0pt;font-family:&quot;Courier New&quot;;color:navy;backgr=
+ound:white;mso-highlight:white">,</span><span lang=3D"EN-US" style=3D"font-=
+size:10.0pt;font-family:&quot;Courier New&quot;;color:blue;background:white=
+;mso-highlight:white">23</span><span lang=3D"EN-US" style=3D"font-size:10.0=
+pt;font-family:&quot;Courier New&quot;;color:navy;background:white;mso-high=
+light:white">)-
+</span><span lang=3D"EN-US" style=3D"font-size:10.0pt;font-family:&quot;Cou=
+rier New&quot;;color:teal;background:white;mso-highlight:white">INSTR</span=
+><span lang=3D"EN-US" style=3D"font-size:10.0pt;font-family:&quot;Courier N=
+ew&quot;;color:navy;background:white;mso-highlight:white">(A.FLOW_DATA,</sp=
+an><span lang=3D"EN-US" style=3D"font-size:10.0pt;font-family:&quot;Courier=
+ New&quot;;color:blue;background:white;mso-highlight:white">'|'</span><span=
+ lang=3D"EN-US" style=3D"font-size:10.0pt;font-family:&quot;Courier New&quo=
+t;;color:navy;background:white;mso-highlight:white">,</span><span lang=3D"E=
+N-US" style=3D"font-size:10.0pt;font-family:&quot;Courier New&quot;;color:b=
+lue;background:white;mso-highlight:white">1</span><span lang=3D"EN-US" styl=
+e=3D"font-size:10.0pt;font-family:&quot;Courier New&quot;;color:navy;backgr=
+ound:white;mso-highlight:white">,</span><span lang=3D"EN-US" style=3D"font-=
+size:10.0pt;font-family:&quot;Courier New&quot;;color:blue;background:white=
+;mso-highlight:white">22</span><span lang=3D"EN-US" style=3D"font-size:10.0=
+pt;font-family:&quot;Courier New&quot;;color:navy;background:white;mso-high=
+light:white">)-</span><span lang=3D"EN-US" style=3D"font-size:10.0pt;font-f=
+amily:&quot;Courier New&quot;;color:blue;background:white;mso-highlight:whi=
+te">1</span><span lang=3D"EN-US" style=3D"font-size:10.0pt;font-family:&quo=
+t;Courier New&quot;;color:navy;background:white;mso-highlight:white">))
+ ADD_3<o:p></o:p></span></p>
+<p class=3D"MsoNormal" style=3D"text-autospace:none"><span lang=3D"EN-US" s=
+tyle=3D"font-size:10.0pt;font-family:&quot;Courier New&quot;;color:navy;bac=
+kground:white;mso-highlight:white">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbs=
+p;&nbsp;&nbsp; , to_char (</span><span lang=3D"EN-US" style=3D"font-size:10=
+.0pt;font-family:&quot;Courier New&quot;;color:teal;background:white;mso-hi=
+ghlight:white">SUBSTR</span><span lang=3D"EN-US" style=3D"font-size:10.0pt;=
+font-family:&quot;Courier New&quot;;color:navy;background:white;mso-highlig=
+ht:white">(A.FLOW_DATA,
+</span><span lang=3D"EN-US" style=3D"font-size:10.0pt;font-family:&quot;Cou=
+rier New&quot;;color:teal;background:white;mso-highlight:white">INSTR</span=
+><span lang=3D"EN-US" style=3D"font-size:10.0pt;font-family:&quot;Courier N=
+ew&quot;;color:navy;background:white;mso-highlight:white">(A.FLOW_DATA,</sp=
+an><span lang=3D"EN-US" style=3D"font-size:10.0pt;font-family:&quot;Courier=
+ New&quot;;color:blue;background:white;mso-highlight:white">'|'</span><span=
+ lang=3D"EN-US" style=3D"font-size:10.0pt;font-family:&quot;Courier New&quo=
+t;;color:navy;background:white;mso-highlight:white">,</span><span lang=3D"E=
+N-US" style=3D"font-size:10.0pt;font-family:&quot;Courier New&quot;;color:b=
+lue;background:white;mso-highlight:white">1</span><span lang=3D"EN-US" styl=
+e=3D"font-size:10.0pt;font-family:&quot;Courier New&quot;;color:navy;backgr=
+ound:white;mso-highlight:white">,</span><span lang=3D"EN-US" style=3D"font-=
+size:10.0pt;font-family:&quot;Courier New&quot;;color:blue;background:white=
+;mso-highlight:white">23</span><span lang=3D"EN-US" style=3D"font-size:10.0=
+pt;font-family:&quot;Courier New&quot;;color:navy;background:white;mso-high=
+light:white">)
+ + </span><span lang=3D"EN-US" style=3D"font-size:10.0pt;font-family:&quot;=
+Courier New&quot;;color:blue;background:white;mso-highlight:white">1</span>=
+<span lang=3D"EN-US" style=3D"font-size:10.0pt;font-family:&quot;Courier Ne=
+w&quot;;color:navy;background:white;mso-highlight:white">,
+</span><span lang=3D"EN-US" style=3D"font-size:10.0pt;font-family:&quot;Cou=
+rier New&quot;;color:teal;background:white;mso-highlight:white">INSTR</span=
+><span lang=3D"EN-US" style=3D"font-size:10.0pt;font-family:&quot;Courier N=
+ew&quot;;color:navy;background:white;mso-highlight:white">(A.FLOW_DATA,</sp=
+an><span lang=3D"EN-US" style=3D"font-size:10.0pt;font-family:&quot;Courier=
+ New&quot;;color:blue;background:white;mso-highlight:white">'|'</span><span=
+ lang=3D"EN-US" style=3D"font-size:10.0pt;font-family:&quot;Courier New&quo=
+t;;color:navy;background:white;mso-highlight:white">,</span><span lang=3D"E=
+N-US" style=3D"font-size:10.0pt;font-family:&quot;Courier New&quot;;color:b=
+lue;background:white;mso-highlight:white">1</span><span lang=3D"EN-US" styl=
+e=3D"font-size:10.0pt;font-family:&quot;Courier New&quot;;color:navy;backgr=
+ound:white;mso-highlight:white">,</span><span lang=3D"EN-US" style=3D"font-=
+size:10.0pt;font-family:&quot;Courier New&quot;;color:blue;background:white=
+;mso-highlight:white">24</span><span lang=3D"EN-US" style=3D"font-size:10.0=
+pt;font-family:&quot;Courier New&quot;;color:navy;background:white;mso-high=
+light:white">)-
+</span><span lang=3D"EN-US" style=3D"font-size:10.0pt;font-family:&quot;Cou=
+rier New&quot;;color:teal;background:white;mso-highlight:white">INSTR</span=
+><span lang=3D"EN-US" style=3D"font-size:10.0pt;font-family:&quot;Courier N=
+ew&quot;;color:navy;background:white;mso-highlight:white">(A.FLOW_DATA,</sp=
+an><span lang=3D"EN-US" style=3D"font-size:10.0pt;font-family:&quot;Courier=
+ New&quot;;color:blue;background:white;mso-highlight:white">'|'</span><span=
+ lang=3D"EN-US" style=3D"font-size:10.0pt;font-family:&quot;Courier New&quo=
+t;;color:navy;background:white;mso-highlight:white">,</span><span lang=3D"E=
+N-US" style=3D"font-size:10.0pt;font-family:&quot;Courier New&quot;;color:b=
+lue;background:white;mso-highlight:white">1</span><span lang=3D"EN-US" styl=
+e=3D"font-size:10.0pt;font-family:&quot;Courier New&quot;;color:navy;backgr=
+ound:white;mso-highlight:white">,</span><span lang=3D"EN-US" style=3D"font-=
+size:10.0pt;font-family:&quot;Courier New&quot;;color:blue;background:white=
+;mso-highlight:white">23</span><span lang=3D"EN-US" style=3D"font-size:10.0=
+pt;font-family:&quot;Courier New&quot;;color:navy;background:white;mso-high=
+light:white">)-</span><span lang=3D"EN-US" style=3D"font-size:10.0pt;font-f=
+amily:&quot;Courier New&quot;;color:blue;background:white;mso-highlight:whi=
+te">1</span><span lang=3D"EN-US" style=3D"font-size:10.0pt;font-family:&quo=
+t;Courier New&quot;;color:navy;background:white;mso-highlight:white">))
+ ADD_4<o:p></o:p></span></p>
+<p class=3D"MsoNormal" style=3D"text-autospace:none"><span lang=3D"EN-US" s=
+tyle=3D"font-size:10.0pt;font-family:&quot;Courier New&quot;;color:navy;bac=
+kground:white;mso-highlight:white">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbs=
+p;&nbsp;&nbsp; , to_char (</span><span lang=3D"EN-US" style=3D"font-size:10=
+.0pt;font-family:&quot;Courier New&quot;;color:teal;background:white;mso-hi=
+ghlight:white">SUBSTR</span><span lang=3D"EN-US" style=3D"font-size:10.0pt;=
+font-family:&quot;Courier New&quot;;color:navy;background:white;mso-highlig=
+ht:white">(A.FLOW_DATA,
+</span><span lang=3D"EN-US" style=3D"font-size:10.0pt;font-family:&quot;Cou=
+rier New&quot;;color:teal;background:white;mso-highlight:white">INSTR</span=
+><span lang=3D"EN-US" style=3D"font-size:10.0pt;font-family:&quot;Courier N=
+ew&quot;;color:navy;background:white;mso-highlight:white">(A.FLOW_DATA,</sp=
+an><span lang=3D"EN-US" style=3D"font-size:10.0pt;font-family:&quot;Courier=
+ New&quot;;color:blue;background:white;mso-highlight:white">'|'</span><span=
+ lang=3D"EN-US" style=3D"font-size:10.0pt;font-family:&quot;Courier New&quo=
+t;;color:navy;background:white;mso-highlight:white">,</span><span lang=3D"E=
+N-US" style=3D"font-size:10.0pt;font-family:&quot;Courier New&quot;;color:b=
+lue;background:white;mso-highlight:white">1</span><span lang=3D"EN-US" styl=
+e=3D"font-size:10.0pt;font-family:&quot;Courier New&quot;;color:navy;backgr=
+ound:white;mso-highlight:white">,</span><span lang=3D"EN-US" style=3D"font-=
+size:10.0pt;font-family:&quot;Courier New&quot;;color:blue;background:white=
+;mso-highlight:white">24</span><span lang=3D"EN-US" style=3D"font-size:10.0=
+pt;font-family:&quot;Courier New&quot;;color:navy;background:white;mso-high=
+light:white">)
+ + </span><span lang=3D"EN-US" style=3D"font-size:10.0pt;font-family:&quot;=
+Courier New&quot;;color:blue;background:white;mso-highlight:white">1</span>=
+<span lang=3D"EN-US" style=3D"font-size:10.0pt;font-family:&quot;Courier Ne=
+w&quot;;color:navy;background:white;mso-highlight:white">,
+</span><span lang=3D"EN-US" style=3D"font-size:10.0pt;font-family:&quot;Cou=
+rier New&quot;;color:teal;background:white;mso-highlight:white">INSTR</span=
+><span lang=3D"EN-US" style=3D"font-size:10.0pt;font-family:&quot;Courier N=
+ew&quot;;color:navy;background:white;mso-highlight:white">(A.FLOW_DATA,</sp=
+an><span lang=3D"EN-US" style=3D"font-size:10.0pt;font-family:&quot;Courier=
+ New&quot;;color:blue;background:white;mso-highlight:white">'|'</span><span=
+ lang=3D"EN-US" style=3D"font-size:10.0pt;font-family:&quot;Courier New&quo=
+t;;color:navy;background:white;mso-highlight:white">,</span><span lang=3D"E=
+N-US" style=3D"font-size:10.0pt;font-family:&quot;Courier New&quot;;color:b=
+lue;background:white;mso-highlight:white">1</span><span lang=3D"EN-US" styl=
+e=3D"font-size:10.0pt;font-family:&quot;Courier New&quot;;color:navy;backgr=
+ound:white;mso-highlight:white">,</span><span lang=3D"EN-US" style=3D"font-=
+size:10.0pt;font-family:&quot;Courier New&quot;;color:blue;background:white=
+;mso-highlight:white">25</span><span lang=3D"EN-US" style=3D"font-size:10.0=
+pt;font-family:&quot;Courier New&quot;;color:navy;background:white;mso-high=
+light:white">)-
+</span><span lang=3D"EN-US" style=3D"font-size:10.0pt;font-family:&quot;Cou=
+rier New&quot;;color:teal;background:white;mso-highlight:white">INSTR</span=
+><span lang=3D"EN-US" style=3D"font-size:10.0pt;font-family:&quot;Courier N=
+ew&quot;;color:navy;background:white;mso-highlight:white">(A.FLOW_DATA,</sp=
+an><span lang=3D"EN-US" style=3D"font-size:10.0pt;font-family:&quot;Courier=
+ New&quot;;color:blue;background:white;mso-highlight:white">'|'</span><span=
+ lang=3D"EN-US" style=3D"font-size:10.0pt;font-family:&quot;Courier New&quo=
+t;;color:navy;background:white;mso-highlight:white">,</span><span lang=3D"E=
+N-US" style=3D"font-size:10.0pt;font-family:&quot;Courier New&quot;;color:b=
+lue;background:white;mso-highlight:white">1</span><span lang=3D"EN-US" styl=
+e=3D"font-size:10.0pt;font-family:&quot;Courier New&quot;;color:navy;backgr=
+ound:white;mso-highlight:white">,</span><span lang=3D"EN-US" style=3D"font-=
+size:10.0pt;font-family:&quot;Courier New&quot;;color:blue;background:white=
+;mso-highlight:white">24</span><span lang=3D"EN-US" style=3D"font-size:10.0=
+pt;font-family:&quot;Courier New&quot;;color:navy;background:white;mso-high=
+light:white">)-</span><span lang=3D"EN-US" style=3D"font-size:10.0pt;font-f=
+amily:&quot;Courier New&quot;;color:blue;background:white;mso-highlight:whi=
+te">1</span><span lang=3D"EN-US" style=3D"font-size:10.0pt;font-family:&quo=
+t;Courier New&quot;;color:navy;background:white;mso-highlight:white">))
+ ADD_5<o:p></o:p></span></p>
+<p class=3D"MsoNormal" style=3D"text-autospace:none"><span lang=3D"EN-US" s=
+tyle=3D"font-size:10.0pt;font-family:&quot;Courier New&quot;;color:navy;bac=
+kground:white;mso-highlight:white">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbs=
+p;&nbsp;&nbsp; , to_char (</span><span lang=3D"EN-US" style=3D"font-size:10=
+.0pt;font-family:&quot;Courier New&quot;;color:teal;background:white;mso-hi=
+ghlight:white">SUBSTR</span><span lang=3D"EN-US" style=3D"font-size:10.0pt;=
+font-family:&quot;Courier New&quot;;color:navy;background:white;mso-highlig=
+ht:white">(A.FLOW_DATA,
+</span><span lang=3D"EN-US" style=3D"font-size:10.0pt;font-family:&quot;Cou=
+rier New&quot;;color:teal;background:white;mso-highlight:white">INSTR</span=
+><span lang=3D"EN-US" style=3D"font-size:10.0pt;font-family:&quot;Courier N=
+ew&quot;;color:navy;background:white;mso-highlight:white">(A.FLOW_DATA,</sp=
+an><span lang=3D"EN-US" style=3D"font-size:10.0pt;font-family:&quot;Courier=
+ New&quot;;color:blue;background:white;mso-highlight:white">'|'</span><span=
+ lang=3D"EN-US" style=3D"font-size:10.0pt;font-family:&quot;Courier New&quo=
+t;;color:navy;background:white;mso-highlight:white">,</span><span lang=3D"E=
+N-US" style=3D"font-size:10.0pt;font-family:&quot;Courier New&quot;;color:b=
+lue;background:white;mso-highlight:white">1</span><span lang=3D"EN-US" styl=
+e=3D"font-size:10.0pt;font-family:&quot;Courier New&quot;;color:navy;backgr=
+ound:white;mso-highlight:white">,</span><span lang=3D"EN-US" style=3D"font-=
+size:10.0pt;font-family:&quot;Courier New&quot;;color:blue;background:white=
+;mso-highlight:white">25</span><span lang=3D"EN-US" style=3D"font-size:10.0=
+pt;font-family:&quot;Courier New&quot;;color:navy;background:white;mso-high=
+light:white">)
+ + </span><span lang=3D"EN-US" style=3D"font-size:10.0pt;font-family:&quot;=
+Courier New&quot;;color:blue;background:white;mso-highlight:white">1</span>=
+<span lang=3D"EN-US" style=3D"font-size:10.0pt;font-family:&quot;Courier Ne=
+w&quot;;color:navy;background:white;mso-highlight:white">,
+</span><span lang=3D"EN-US" style=3D"font-size:10.0pt;font-family:&quot;Cou=
+rier New&quot;;color:teal;background:white;mso-highlight:white">INSTR</span=
+><span lang=3D"EN-US" style=3D"font-size:10.0pt;font-family:&quot;Courier N=
+ew&quot;;color:navy;background:white;mso-highlight:white">(A.FLOW_DATA,</sp=
+an><span lang=3D"EN-US" style=3D"font-size:10.0pt;font-family:&quot;Courier=
+ New&quot;;color:blue;background:white;mso-highlight:white">'|'</span><span=
+ lang=3D"EN-US" style=3D"font-size:10.0pt;font-family:&quot;Courier New&quo=
+t;;color:navy;background:white;mso-highlight:white">,</span><span lang=3D"E=
+N-US" style=3D"font-size:10.0pt;font-family:&quot;Courier New&quot;;color:b=
+lue;background:white;mso-highlight:white">1</span><span lang=3D"EN-US" styl=
+e=3D"font-size:10.0pt;font-family:&quot;Courier New&quot;;color:navy;backgr=
+ound:white;mso-highlight:white">,</span><span lang=3D"EN-US" style=3D"font-=
+size:10.0pt;font-family:&quot;Courier New&quot;;color:blue;background:white=
+;mso-highlight:white">26</span><span lang=3D"EN-US" style=3D"font-size:10.0=
+pt;font-family:&quot;Courier New&quot;;color:navy;background:white;mso-high=
+light:white">)-
+</span><span lang=3D"EN-US" style=3D"font-size:10.0pt;font-family:&quot;Cou=
+rier New&quot;;color:teal;background:white;mso-highlight:white">INSTR</span=
+><span lang=3D"EN-US" style=3D"font-size:10.0pt;font-family:&quot;Courier N=
+ew&quot;;color:navy;background:white;mso-highlight:white">(A.FLOW_DATA,</sp=
+an><span lang=3D"EN-US" style=3D"font-size:10.0pt;font-family:&quot;Courier=
+ New&quot;;color:blue;background:white;mso-highlight:white">'|'</span><span=
+ lang=3D"EN-US" style=3D"font-size:10.0pt;font-family:&quot;Courier New&quo=
+t;;color:navy;background:white;mso-highlight:white">,</span><span lang=3D"E=
+N-US" style=3D"font-size:10.0pt;font-family:&quot;Courier New&quot;;color:b=
+lue;background:white;mso-highlight:white">1</span><span lang=3D"EN-US" styl=
+e=3D"font-size:10.0pt;font-family:&quot;Courier New&quot;;color:navy;backgr=
+ound:white;mso-highlight:white">,</span><span lang=3D"EN-US" style=3D"font-=
+size:10.0pt;font-family:&quot;Courier New&quot;;color:blue;background:white=
+;mso-highlight:white">25</span><span lang=3D"EN-US" style=3D"font-size:10.0=
+pt;font-family:&quot;Courier New&quot;;color:navy;background:white;mso-high=
+light:white">)-</span><span lang=3D"EN-US" style=3D"font-size:10.0pt;font-f=
+amily:&quot;Courier New&quot;;color:blue;background:white;mso-highlight:whi=
+te">1</span><span lang=3D"EN-US" style=3D"font-size:10.0pt;font-family:&quo=
+t;Courier New&quot;;color:navy;background:white;mso-highlight:white">))
+ ADD_6<o:p></o:p></span></p>
+<p class=3D"MsoNormal" style=3D"text-autospace:none"><span lang=3D"EN-US" s=
+tyle=3D"font-size:10.0pt;font-family:&quot;Courier New&quot;;color:navy;bac=
+kground:white;mso-highlight:white">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbs=
+p;&nbsp;&nbsp; , to_char (</span><span lang=3D"EN-US" style=3D"font-size:10=
+.0pt;font-family:&quot;Courier New&quot;;color:teal;background:white;mso-hi=
+ghlight:white">SUBSTR</span><span lang=3D"EN-US" style=3D"font-size:10.0pt;=
+font-family:&quot;Courier New&quot;;color:navy;background:white;mso-highlig=
+ht:white">(A.FLOW_DATA,
+</span><span lang=3D"EN-US" style=3D"font-size:10.0pt;font-family:&quot;Cou=
+rier New&quot;;color:teal;background:white;mso-highlight:white">INSTR</span=
+><span lang=3D"EN-US" style=3D"font-size:10.0pt;font-family:&quot;Courier N=
+ew&quot;;color:navy;background:white;mso-highlight:white">(A.FLOW_DATA,</sp=
+an><span lang=3D"EN-US" style=3D"font-size:10.0pt;font-family:&quot;Courier=
+ New&quot;;color:blue;background:white;mso-highlight:white">'|'</span><span=
+ lang=3D"EN-US" style=3D"font-size:10.0pt;font-family:&quot;Courier New&quo=
+t;;color:navy;background:white;mso-highlight:white">,</span><span lang=3D"E=
+N-US" style=3D"font-size:10.0pt;font-family:&quot;Courier New&quot;;color:b=
+lue;background:white;mso-highlight:white">1</span><span lang=3D"EN-US" styl=
+e=3D"font-size:10.0pt;font-family:&quot;Courier New&quot;;color:navy;backgr=
+ound:white;mso-highlight:white">,</span><span lang=3D"EN-US" style=3D"font-=
+size:10.0pt;font-family:&quot;Courier New&quot;;color:blue;background:white=
+;mso-highlight:white">26</span><span lang=3D"EN-US" style=3D"font-size:10.0=
+pt;font-family:&quot;Courier New&quot;;color:navy;background:white;mso-high=
+light:white">)
+ + </span><span lang=3D"EN-US" style=3D"font-size:10.0pt;font-family:&quot;=
+Courier New&quot;;color:blue;background:white;mso-highlight:white">1</span>=
+<span lang=3D"EN-US" style=3D"font-size:10.0pt;font-family:&quot;Courier Ne=
+w&quot;;color:navy;background:white;mso-highlight:white">,
+</span><span lang=3D"EN-US" style=3D"font-size:10.0pt;font-family:&quot;Cou=
+rier New&quot;;color:teal;background:white;mso-highlight:white">INSTR</span=
+><span lang=3D"EN-US" style=3D"font-size:10.0pt;font-family:&quot;Courier N=
+ew&quot;;color:navy;background:white;mso-highlight:white">(A.FLOW_DATA,</sp=
+an><span lang=3D"EN-US" style=3D"font-size:10.0pt;font-family:&quot;Courier=
+ New&quot;;color:blue;background:white;mso-highlight:white">'|'</span><span=
+ lang=3D"EN-US" style=3D"font-size:10.0pt;font-family:&quot;Courier New&quo=
+t;;color:navy;background:white;mso-highlight:white">,</span><span lang=3D"E=
+N-US" style=3D"font-size:10.0pt;font-family:&quot;Courier New&quot;;color:b=
+lue;background:white;mso-highlight:white">1</span><span lang=3D"EN-US" styl=
+e=3D"font-size:10.0pt;font-family:&quot;Courier New&quot;;color:navy;backgr=
+ound:white;mso-highlight:white">,</span><span lang=3D"EN-US" style=3D"font-=
+size:10.0pt;font-family:&quot;Courier New&quot;;color:blue;background:white=
+;mso-highlight:white">27</span><span lang=3D"EN-US" style=3D"font-size:10.0=
+pt;font-family:&quot;Courier New&quot;;color:navy;background:white;mso-high=
+light:white">)-
+</span><span lang=3D"EN-US" style=3D"font-size:10.0pt;font-family:&quot;Cou=
+rier New&quot;;color:teal;background:white;mso-highlight:white">INSTR</span=
+><span lang=3D"EN-US" style=3D"font-size:10.0pt;font-family:&quot;Courier N=
+ew&quot;;color:navy;background:white;mso-highlight:white">(A.FLOW_DATA,</sp=
+an><span lang=3D"EN-US" style=3D"font-size:10.0pt;font-family:&quot;Courier=
+ New&quot;;color:blue;background:white;mso-highlight:white">'|'</span><span=
+ lang=3D"EN-US" style=3D"font-size:10.0pt;font-family:&quot;Courier New&quo=
+t;;color:navy;background:white;mso-highlight:white">,</span><span lang=3D"E=
+N-US" style=3D"font-size:10.0pt;font-family:&quot;Courier New&quot;;color:b=
+lue;background:white;mso-highlight:white">1</span><span lang=3D"EN-US" styl=
+e=3D"font-size:10.0pt;font-family:&quot;Courier New&quot;;color:navy;backgr=
+ound:white;mso-highlight:white">,</span><span lang=3D"EN-US" style=3D"font-=
+size:10.0pt;font-family:&quot;Courier New&quot;;color:blue;background:white=
+;mso-highlight:white">26</span><span lang=3D"EN-US" style=3D"font-size:10.0=
+pt;font-family:&quot;Courier New&quot;;color:navy;background:white;mso-high=
+light:white">)-</span><span lang=3D"EN-US" style=3D"font-size:10.0pt;font-f=
+amily:&quot;Courier New&quot;;color:blue;background:white;mso-highlight:whi=
+te">1</span><span lang=3D"EN-US" style=3D"font-size:10.0pt;font-family:&quo=
+t;Courier New&quot;;color:navy;background:white;mso-highlight:white">))
+ ADD_7<o:p></o:p></span></p>
+<p class=3D"MsoNormal" style=3D"text-autospace:none"><span lang=3D"EN-US" s=
+tyle=3D"font-size:10.0pt;font-family:&quot;Courier New&quot;;color:navy;bac=
+kground:white;mso-highlight:white">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbs=
+p;&nbsp;&nbsp; , to_char (</span><span lang=3D"EN-US" style=3D"font-size:10=
+.0pt;font-family:&quot;Courier New&quot;;color:teal;background:white;mso-hi=
+ghlight:white">SUBSTR</span><span lang=3D"EN-US" style=3D"font-size:10.0pt;=
+font-family:&quot;Courier New&quot;;color:navy;background:white;mso-highlig=
+ht:white">(A.FLOW_DATA,
+</span><span lang=3D"EN-US" style=3D"font-size:10.0pt;font-family:&quot;Cou=
+rier New&quot;;color:teal;background:white;mso-highlight:white">INSTR</span=
+><span lang=3D"EN-US" style=3D"font-size:10.0pt;font-family:&quot;Courier N=
+ew&quot;;color:navy;background:white;mso-highlight:white">(A.FLOW_DATA,</sp=
+an><span lang=3D"EN-US" style=3D"font-size:10.0pt;font-family:&quot;Courier=
+ New&quot;;color:blue;background:white;mso-highlight:white">'|'</span><span=
+ lang=3D"EN-US" style=3D"font-size:10.0pt;font-family:&quot;Courier New&quo=
+t;;color:navy;background:white;mso-highlight:white">,</span><span lang=3D"E=
+N-US" style=3D"font-size:10.0pt;font-family:&quot;Courier New&quot;;color:b=
+lue;background:white;mso-highlight:white">1</span><span lang=3D"EN-US" styl=
+e=3D"font-size:10.0pt;font-family:&quot;Courier New&quot;;color:navy;backgr=
+ound:white;mso-highlight:white">,</span><span lang=3D"EN-US" style=3D"font-=
+size:10.0pt;font-family:&quot;Courier New&quot;;color:blue;background:white=
+;mso-highlight:white">27</span><span lang=3D"EN-US" style=3D"font-size:10.0=
+pt;font-family:&quot;Courier New&quot;;color:navy;background:white;mso-high=
+light:white">)
+ + </span><span lang=3D"EN-US" style=3D"font-size:10.0pt;font-family:&quot;=
+Courier New&quot;;color:blue;background:white;mso-highlight:white">1</span>=
+<span lang=3D"EN-US" style=3D"font-size:10.0pt;font-family:&quot;Courier Ne=
+w&quot;;color:navy;background:white;mso-highlight:white">,
+</span><span lang=3D"EN-US" style=3D"font-size:10.0pt;font-family:&quot;Cou=
+rier New&quot;;color:teal;background:white;mso-highlight:white">INSTR</span=
+><span lang=3D"EN-US" style=3D"font-size:10.0pt;font-family:&quot;Courier N=
+ew&quot;;color:navy;background:white;mso-highlight:white">(A.FLOW_DATA,</sp=
+an><span lang=3D"EN-US" style=3D"font-size:10.0pt;font-family:&quot;Courier=
+ New&quot;;color:blue;background:white;mso-highlight:white">'|'</span><span=
+ lang=3D"EN-US" style=3D"font-size:10.0pt;font-family:&quot;Courier New&quo=
+t;;color:navy;background:white;mso-highlight:white">,</span><span lang=3D"E=
+N-US" style=3D"font-size:10.0pt;font-family:&quot;Courier New&quot;;color:b=
+lue;background:white;mso-highlight:white">1</span><span lang=3D"EN-US" styl=
+e=3D"font-size:10.0pt;font-family:&quot;Courier New&quot;;color:navy;backgr=
+ound:white;mso-highlight:white">,</span><span lang=3D"EN-US" style=3D"font-=
+size:10.0pt;font-family:&quot;Courier New&quot;;color:blue;background:white=
+;mso-highlight:white">28</span><span lang=3D"EN-US" style=3D"font-size:10.0=
+pt;font-family:&quot;Courier New&quot;;color:navy;background:white;mso-high=
+light:white">)-
+</span><span lang=3D"EN-US" style=3D"font-size:10.0pt;font-family:&quot;Cou=
+rier New&quot;;color:teal;background:white;mso-highlight:white">INSTR</span=
+><span lang=3D"EN-US" style=3D"font-size:10.0pt;font-family:&quot;Courier N=
+ew&quot;;color:navy;background:white;mso-highlight:white">(A.FLOW_DATA,</sp=
+an><span lang=3D"EN-US" style=3D"font-size:10.0pt;font-family:&quot;Courier=
+ New&quot;;color:blue;background:white;mso-highlight:white">'|'</span><span=
+ lang=3D"EN-US" style=3D"font-size:10.0pt;font-family:&quot;Courier New&quo=
+t;;color:navy;background:white;mso-highlight:white">,</span><span lang=3D"E=
+N-US" style=3D"font-size:10.0pt;font-family:&quot;Courier New&quot;;color:b=
+lue;background:white;mso-highlight:white">1</span><span lang=3D"EN-US" styl=
+e=3D"font-size:10.0pt;font-family:&quot;Courier New&quot;;color:navy;backgr=
+ound:white;mso-highlight:white">,</span><span lang=3D"EN-US" style=3D"font-=
+size:10.0pt;font-family:&quot;Courier New&quot;;color:blue;background:white=
+;mso-highlight:white">27</span><span lang=3D"EN-US" style=3D"font-size:10.0=
+pt;font-family:&quot;Courier New&quot;;color:navy;background:white;mso-high=
+light:white">)-</span><span lang=3D"EN-US" style=3D"font-size:10.0pt;font-f=
+amily:&quot;Courier New&quot;;color:blue;background:white;mso-highlight:whi=
+te">1</span><span lang=3D"EN-US" style=3D"font-size:10.0pt;font-family:&quo=
+t;Courier New&quot;;color:navy;background:white;mso-highlight:white">))
+ ADD_8<o:p></o:p></span></p>
+<p class=3D"MsoNormal" style=3D"text-autospace:none"><span lang=3D"EN-US" s=
+tyle=3D"font-size:10.0pt;font-family:&quot;Courier New&quot;;color:navy;bac=
+kground:white;mso-highlight:white">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbs=
+p;&nbsp;&nbsp; , to_char (</span><span lang=3D"EN-US" style=3D"font-size:10=
+.0pt;font-family:&quot;Courier New&quot;;color:teal;background:white;mso-hi=
+ghlight:white">SUBSTR</span><span lang=3D"EN-US" style=3D"font-size:10.0pt;=
+font-family:&quot;Courier New&quot;;color:navy;background:white;mso-highlig=
+ht:white">(A.FLOW_DATA,
+</span><span lang=3D"EN-US" style=3D"font-size:10.0pt;font-family:&quot;Cou=
+rier New&quot;;color:teal;background:white;mso-highlight:white">INSTR</span=
+><span lang=3D"EN-US" style=3D"font-size:10.0pt;font-family:&quot;Courier N=
+ew&quot;;color:navy;background:white;mso-highlight:white">(A.FLOW_DATA,</sp=
+an><span lang=3D"EN-US" style=3D"font-size:10.0pt;font-family:&quot;Courier=
+ New&quot;;color:blue;background:white;mso-highlight:white">'|'</span><span=
+ lang=3D"EN-US" style=3D"font-size:10.0pt;font-family:&quot;Courier New&quo=
+t;;color:navy;background:white;mso-highlight:white">,</span><span lang=3D"E=
+N-US" style=3D"font-size:10.0pt;font-family:&quot;Courier New&quot;;color:b=
+lue;background:white;mso-highlight:white">1</span><span lang=3D"EN-US" styl=
+e=3D"font-size:10.0pt;font-family:&quot;Courier New&quot;;color:navy;backgr=
+ound:white;mso-highlight:white">,</span><span lang=3D"EN-US" style=3D"font-=
+size:10.0pt;font-family:&quot;Courier New&quot;;color:blue;background:white=
+;mso-highlight:white">28</span><span lang=3D"EN-US" style=3D"font-size:10.0=
+pt;font-family:&quot;Courier New&quot;;color:navy;background:white;mso-high=
+light:white">)
+ + </span><span lang=3D"EN-US" style=3D"font-size:10.0pt;font-family:&quot;=
+Courier New&quot;;color:blue;background:white;mso-highlight:white">1</span>=
+<span lang=3D"EN-US" style=3D"font-size:10.0pt;font-family:&quot;Courier Ne=
+w&quot;;color:navy;background:white;mso-highlight:white">,
+</span><span lang=3D"EN-US" style=3D"font-size:10.0pt;font-family:&quot;Cou=
+rier New&quot;;color:teal;background:white;mso-highlight:white">INSTR</span=
+><span lang=3D"EN-US" style=3D"font-size:10.0pt;font-family:&quot;Courier N=
+ew&quot;;color:navy;background:white;mso-highlight:white">(A.FLOW_DATA,</sp=
+an><span lang=3D"EN-US" style=3D"font-size:10.0pt;font-family:&quot;Courier=
+ New&quot;;color:blue;background:white;mso-highlight:white">'|'</span><span=
+ lang=3D"EN-US" style=3D"font-size:10.0pt;font-family:&quot;Courier New&quo=
+t;;color:navy;background:white;mso-highlight:white">,</span><span lang=3D"E=
+N-US" style=3D"font-size:10.0pt;font-family:&quot;Courier New&quot;;color:b=
+lue;background:white;mso-highlight:white">1</span><span lang=3D"EN-US" styl=
+e=3D"font-size:10.0pt;font-family:&quot;Courier New&quot;;color:navy;backgr=
+ound:white;mso-highlight:white">,</span><span lang=3D"EN-US" style=3D"font-=
+size:10.0pt;font-family:&quot;Courier New&quot;;color:blue;background:white=
+;mso-highlight:white">29</span><span lang=3D"EN-US" style=3D"font-size:10.0=
+pt;font-family:&quot;Courier New&quot;;color:navy;background:white;mso-high=
+light:white">)-
+</span><span lang=3D"EN-US" style=3D"font-size:10.0pt;font-family:&quot;Cou=
+rier New&quot;;color:teal;background:white;mso-highlight:white">INSTR</span=
+><span lang=3D"EN-US" style=3D"font-size:10.0pt;font-family:&quot;Courier N=
+ew&quot;;color:navy;background:white;mso-highlight:white">(A.FLOW_DATA,</sp=
+an><span lang=3D"EN-US" style=3D"font-size:10.0pt;font-family:&quot;Courier=
+ New&quot;;color:blue;background:white;mso-highlight:white">'|'</span><span=
+ lang=3D"EN-US" style=3D"font-size:10.0pt;font-family:&quot;Courier New&quo=
+t;;color:navy;background:white;mso-highlight:white">,</span><span lang=3D"E=
+N-US" style=3D"font-size:10.0pt;font-family:&quot;Courier New&quot;;color:b=
+lue;background:white;mso-highlight:white">1</span><span lang=3D"EN-US" styl=
+e=3D"font-size:10.0pt;font-family:&quot;Courier New&quot;;color:navy;backgr=
+ound:white;mso-highlight:white">,</span><span lang=3D"EN-US" style=3D"font-=
+size:10.0pt;font-family:&quot;Courier New&quot;;color:blue;background:white=
+;mso-highlight:white">28</span><span lang=3D"EN-US" style=3D"font-size:10.0=
+pt;font-family:&quot;Courier New&quot;;color:navy;background:white;mso-high=
+light:white">)-</span><span lang=3D"EN-US" style=3D"font-size:10.0pt;font-f=
+amily:&quot;Courier New&quot;;color:blue;background:white;mso-highlight:whi=
+te">1</span><span lang=3D"EN-US" style=3D"font-size:10.0pt;font-family:&quo=
+t;Courier New&quot;;color:navy;background:white;mso-highlight:white">))
+ ADD_9<o:p></o:p></span></p>
+<p class=3D"MsoNormal" style=3D"text-autospace:none"><span lang=3D"EN-US" s=
+tyle=3D"font-size:10.0pt;font-family:&quot;Courier New&quot;;color:navy;bac=
+kground:white;mso-highlight:white">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbs=
+p;&nbsp;&nbsp; , to_char (</span><span lang=3D"EN-US" style=3D"font-size:10=
+.0pt;font-family:&quot;Courier New&quot;;color:teal;background:white;mso-hi=
+ghlight:white">SUBSTR</span><span lang=3D"EN-US" style=3D"font-size:10.0pt;=
+font-family:&quot;Courier New&quot;;color:navy;background:white;mso-highlig=
+ht:white">(A.FLOW_DATA,
+</span><span lang=3D"EN-US" style=3D"font-size:10.0pt;font-family:&quot;Cou=
+rier New&quot;;color:teal;background:white;mso-highlight:white">INSTR</span=
+><span lang=3D"EN-US" style=3D"font-size:10.0pt;font-family:&quot;Courier N=
+ew&quot;;color:navy;background:white;mso-highlight:white">(A.FLOW_DATA,</sp=
+an><span lang=3D"EN-US" style=3D"font-size:10.0pt;font-family:&quot;Courier=
+ New&quot;;color:blue;background:white;mso-highlight:white">'|'</span><span=
+ lang=3D"EN-US" style=3D"font-size:10.0pt;font-family:&quot;Courier New&quo=
+t;;color:navy;background:white;mso-highlight:white">,</span><span lang=3D"E=
+N-US" style=3D"font-size:10.0pt;font-family:&quot;Courier New&quot;;color:b=
+lue;background:white;mso-highlight:white">1</span><span lang=3D"EN-US" styl=
+e=3D"font-size:10.0pt;font-family:&quot;Courier New&quot;;color:navy;backgr=
+ound:white;mso-highlight:white">,</span><span lang=3D"EN-US" style=3D"font-=
+size:10.0pt;font-family:&quot;Courier New&quot;;color:blue;background:white=
+;mso-highlight:white">29</span><span lang=3D"EN-US" style=3D"font-size:10.0=
+pt;font-family:&quot;Courier New&quot;;color:navy;background:white;mso-high=
+light:white">)
+ + </span><span lang=3D"EN-US" style=3D"font-size:10.0pt;font-family:&quot;=
+Courier New&quot;;color:blue;background:white;mso-highlight:white">1</span>=
+<span lang=3D"EN-US" style=3D"font-size:10.0pt;font-family:&quot;Courier Ne=
+w&quot;;color:navy;background:white;mso-highlight:white">,
+</span><span lang=3D"EN-US" style=3D"font-size:10.0pt;font-family:&quot;Cou=
+rier New&quot;;color:teal;background:white;mso-highlight:white">INSTR</span=
+><span lang=3D"EN-US" style=3D"font-size:10.0pt;font-family:&quot;Courier N=
+ew&quot;;color:navy;background:white;mso-highlight:white">(A.FLOW_DATA,</sp=
+an><span lang=3D"EN-US" style=3D"font-size:10.0pt;font-family:&quot;Courier=
+ New&quot;;color:blue;background:white;mso-highlight:white">'|'</span><span=
+ lang=3D"EN-US" style=3D"font-size:10.0pt;font-family:&quot;Courier New&quo=
+t;;color:navy;background:white;mso-highlight:white">,</span><span lang=3D"E=
+N-US" style=3D"font-size:10.0pt;font-family:&quot;Courier New&quot;;color:b=
+lue;background:white;mso-highlight:white">1</span><span lang=3D"EN-US" styl=
+e=3D"font-size:10.0pt;font-family:&quot;Courier New&quot;;color:navy;backgr=
+ound:white;mso-highlight:white">,</span><span lang=3D"EN-US" style=3D"font-=
+size:10.0pt;font-family:&quot;Courier New&quot;;color:blue;background:white=
+;mso-highlight:white">30</span><span lang=3D"EN-US" style=3D"font-size:10.0=
+pt;font-family:&quot;Courier New&quot;;color:navy;background:white;mso-high=
+light:white">)-
+</span><span lang=3D"EN-US" style=3D"font-size:10.0pt;font-family:&quot;Cou=
+rier New&quot;;color:teal;background:white;mso-highlight:white">INSTR</span=
+><span lang=3D"EN-US" style=3D"font-size:10.0pt;font-family:&quot;Courier N=
+ew&quot;;color:navy;background:white;mso-highlight:white">(A.FLOW_DATA,</sp=
+an><span lang=3D"EN-US" style=3D"font-size:10.0pt;font-family:&quot;Courier=
+ New&quot;;color:blue;background:white;mso-highlight:white">'|'</span><span=
+ lang=3D"EN-US" style=3D"font-size:10.0pt;font-family:&quot;Courier New&quo=
+t;;color:navy;background:white;mso-highlight:white">,</span><span lang=3D"E=
+N-US" style=3D"font-size:10.0pt;font-family:&quot;Courier New&quot;;color:b=
+lue;background:white;mso-highlight:white">1</span><span lang=3D"EN-US" styl=
+e=3D"font-size:10.0pt;font-family:&quot;Courier New&quot;;color:navy;backgr=
+ound:white;mso-highlight:white">,</span><span lang=3D"EN-US" style=3D"font-=
+size:10.0pt;font-family:&quot;Courier New&quot;;color:blue;background:white=
+;mso-highlight:white">29</span><span lang=3D"EN-US" style=3D"font-size:10.0=
+pt;font-family:&quot;Courier New&quot;;color:navy;background:white;mso-high=
+light:white">)-</span><span lang=3D"EN-US" style=3D"font-size:10.0pt;font-f=
+amily:&quot;Courier New&quot;;color:blue;background:white;mso-highlight:whi=
+te">1</span><span lang=3D"EN-US" style=3D"font-size:10.0pt;font-family:&quo=
+t;Courier New&quot;;color:navy;background:white;mso-highlight:white">))
+ POST_CODE<o:p></o:p></span></p>
+<p class=3D"MsoNormal" style=3D"text-autospace:none"><span lang=3D"EN-US" s=
+tyle=3D"font-size:10.0pt;font-family:&quot;Courier New&quot;;color:teal;bac=
+kground:white;mso-highlight:white">From</span><span lang=3D"EN-US" style=3D=
+"font-size:10.0pt;font-family:&quot;Courier New&quot;;color:navy;background=
+:white;mso-highlight:white">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+ eman.flow_archive_mpan_data a <o:p></o:p></span></p>
+<p class=3D"MsoNormal" style=3D"text-autospace:none"><span lang=3D"EN-US" s=
+tyle=3D"font-size:10.0pt;font-family:&quot;Courier New&quot;;color:teal;bac=
+kground:white;mso-highlight:white">Join</span><span lang=3D"EN-US" style=3D=
+"font-size:10.0pt;font-family:&quot;Courier New&quot;;color:navy;background=
+:white;mso-highlight:white">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+ EMAN.FLOW_ARCHIVE_FILE b<o:p></o:p></span></p>
+<p class=3D"MsoNormal" style=3D"text-autospace:none"><span lang=3D"EN-US" s=
+tyle=3D"font-size:10.0pt;font-family:&quot;Courier New&quot;;color:teal;bac=
+kground:white;mso-highlight:white">ON</span><span lang=3D"EN-US" style=3D"f=
+ont-size:10.0pt;font-family:&quot;Courier New&quot;;color:navy;background:w=
+hite;mso-highlight:white">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&=
+nbsp;
+ A.FILENAME =3D B.FILENAME<o:p></o:p></span></p>
+<p class=3D"MsoNormal" style=3D"text-autospace:none"><span lang=3D"EN-US" s=
+tyle=3D"font-size:10.0pt;font-family:&quot;Courier New&quot;;color:teal;bac=
+kground:white;mso-highlight:white">where</span><span lang=3D"EN-US" style=
+=3D"font-size:10.0pt;font-family:&quot;Courier New&quot;;color:navy;backgro=
+und:white;mso-highlight:white">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span><span lang=3D"EN-US" style=3D"font-size:10.0pt;font-family:&quot;Cou=
+rier New&quot;;color:teal;background:white;mso-highlight:white">substr</spa=
+n><span lang=3D"EN-US" style=3D"font-size:10.0pt;font-family:&quot;Courier =
+New&quot;;color:navy;background:white;mso-highlight:white">(a.filename,</sp=
+an><span lang=3D"EN-US" style=3D"font-size:10.0pt;font-family:&quot;Courier=
+ New&quot;;color:blue;background:white;mso-highlight:white">3</span><span l=
+ang=3D"EN-US" style=3D"font-size:10.0pt;font-family:&quot;Courier New&quot;=
+;color:navy;background:white;mso-highlight:white">,</span><span lang=3D"EN-=
+US" style=3D"font-size:10.0pt;font-family:&quot;Courier New&quot;;color:blu=
+e;background:white;mso-highlight:white">5</span><span lang=3D"EN-US" style=
+=3D"font-size:10.0pt;font-family:&quot;Courier New&quot;;color:navy;backgro=
+und:white;mso-highlight:white">)
+ =3D </span><span lang=3D"EN-US" style=3D"font-size:10.0pt;font-family:&quo=
+t;Courier New&quot;;color:blue;background:white;mso-highlight:white">'D0132=
+'</span><span lang=3D"EN-US" style=3D"font-size:10.0pt;font-family:&quot;Co=
+urier New&quot;;color:navy;background:white;mso-highlight:white"><o:p></o:p=
+></span></p>
+<p class=3D"MsoNormal" style=3D"text-autospace:none"><span lang=3D"EN-US" s=
+tyle=3D"font-size:10.0pt;font-family:&quot;Courier New&quot;;color:teal;bac=
+kground:white;mso-highlight:white">and</span><span lang=3D"EN-US" style=3D"=
+font-size:10.0pt;font-family:&quot;Courier New&quot;;color:navy;background:=
+white;mso-highlight:white">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+ A.DATE_ARCHIVED &gt;=3D </span><span lang=3D"EN-US" style=3D"font-size:10.=
+0pt;font-family:&quot;Courier New&quot;;color:blue;background:white;mso-hig=
+hlight:white">'13-JAN-2021'</span><span lang=3D"EN-US" style=3D"font-size:1=
+0.0pt;font-family:&quot;Courier New&quot;;color:navy;background:white;mso-h=
+ighlight:white"><o:p></o:p></span></p>
+<p class=3D"MsoNormal"><span lang=3D"EN-US" style=3D"font-size:10.0pt;font-=
+family:&quot;Courier New&quot;;color:navy;background:white;mso-highlight:wh=
+ite">;</span><o:p></o:p></p>
+<p class=3D"MsoNormal" style=3D"mso-margin-top-alt:auto;mso-margin-bottom-a=
+lt:auto"><span style=3D"font-size:10.0pt;font-family:&quot;Arial&quot;,sans=
+-serif;color:navy;mso-fareast-language:EN-GB">Kind Regards</span><span styl=
+e=3D"font-size:12.0pt;font-family:&quot;Times New Roman&quot;,serif;color:#=
+1F497D;mso-fareast-language:EN-GB">
+<o:p></o:p></span></p>
+<p class=3D"MsoNormal" style=3D"mso-margin-top-alt:auto;mso-margin-bottom-a=
+lt:auto"><span style=3D"font-size:10.0pt;font-family:&quot;Arial&quot;,sans=
+-serif;color:navy;mso-fareast-language:EN-GB">Judith Stacey</span><span sty=
+le=3D"font-size:12.0pt;font-family:&quot;Times New Roman&quot;,serif;color:=
+#1F497D;mso-fareast-language:EN-GB">
+<br>
+</span><span style=3D"font-size:10.0pt;font-family:&quot;Arial&quot;,sans-s=
+erif;color:navy;mso-fareast-language:EN-GB">Business Analyst =96 Operationa=
+l Insight</span><span style=3D"font-size:12.0pt;font-family:&quot;Times New=
+ Roman&quot;,serif;color:#1F497D;mso-fareast-language:EN-GB"><br>
+</span><span style=3D"font-size:10.0pt;font-family:&quot;Arial&quot;,sans-s=
+erif;color:navy;mso-fareast-language:EN-GB">Residential Operations<o:p></o:=
+p></span></p>
+<p class=3D"MsoNormal"><span style=3D"font-size:10.0pt;font-family:&quot;Ar=
+ial&quot;,sans-serif;color:navy;mso-fareast-language:EN-GB">Mobile 07976 82=
+0833<o:p></o:p></span></p>
+<p class=3D"MsoNormal" style=3D"margin-bottom:12.0pt"><span style=3D"font-s=
+ize:10.0pt;font-family:&quot;Arial&quot;,sans-serif;color:navy;mso-fareast-=
+language:EN-GB">Fax 0115 876 7209</span><span style=3D"font-size:12.0pt;fon=
+t-family:&quot;Times New Roman&quot;,serif;color:#1F497D;mso-fareast-langua=
+ge:EN-GB">
+<br>
+</span><span style=3D"font-size:10.0pt;font-family:&quot;Arial&quot;,sans-s=
+erif;color:navy;mso-fareast-language:EN-GB">Email
+</span><span style=3D"font-size:12.0pt;font-family:&quot;Times New Roman&qu=
+ot;,serif;color:#1F497D;mso-fareast-language:EN-GB"><a href=3D"mailto:dorke=
+s.judith@powergen.co.uk"><span style=3D"font-size:10.0pt;font-family:&quot;=
+Arial&quot;,sans-serif;color:blue">dorkes.judith@eonenergy.com</span></a></=
+span><span style=3D"font-size:10.0pt;font-family:&quot;Arial&quot;,sans-ser=
+if;color:navy;mso-fareast-language:EN-GB"><o:p></o:p></span></p>
+<p class=3D"MsoNormal"><span style=3D"font-size:10.0pt;font-family:&quot;Ar=
+ial&quot;,sans-serif;color:navy;mso-fareast-language:EN-GB">E.ON Energy Sol=
+utions Limited</span><span style=3D"font-size:12.0pt;font-family:&quot;Time=
+s New Roman&quot;,serif;color:#1F497D;mso-fareast-language:EN-GB"><br>
+</span><span style=3D"font-size:10.0pt;font-family:&quot;Arial&quot;,sans-s=
+erif;color:navy;mso-fareast-language:EN-GB">Newstead Court<o:p></o:p></span=
+></p>
+<p class=3D"MsoNormal"><span style=3D"font-size:10.0pt;font-family:&quot;Ar=
+ial&quot;,sans-serif;color:navy;mso-fareast-language:EN-GB">Little Oak Driv=
+e<o:p></o:p></span></p>
+<p class=3D"MsoNormal"><span style=3D"font-size:10.0pt;font-family:&quot;Ar=
+ial&quot;,sans-serif;color:navy;mso-fareast-language:EN-GB">Annesley</span>=
+<span style=3D"font-size:12.0pt;font-family:&quot;Times New Roman&quot;,ser=
+if;color:#1F497D;mso-fareast-language:EN-GB">
+<br>
+</span><span style=3D"font-size:10.0pt;font-family:&quot;Arial&quot;,sans-s=
+erif;color:navy;mso-fareast-language:EN-GB">Nottinghamshire<o:p></o:p></spa=
+n></p>
+<p class=3D"MsoNormal"><span style=3D"font-size:10.0pt;font-family:&quot;Ar=
+ial&quot;,sans-serif;color:navy;mso-fareast-language:EN-GB">NG15 0DR</span>=
+<span style=3D"font-size:12.0pt;font-family:&quot;Times New Roman&quot;,ser=
+if;color:#1F497D;mso-fareast-language:EN-GB">
+<br>
+<a href=3D"https://eur01.safelinks.protection.outlook.com/?url=3Dhttp%3A%2F=
+%2Fwww.eon-uk.com%2F&amp;data=3D04%7C01%7CVictoria.vonhoven%40eon-uk.com%7C=
+89871e27e601426fa97608d8d4e43a2c%7Cb914a242e718443ba47c6b4c649d8c0a%7C0%7C0=
+%7C637493423980929021%7CUnknown%7CTWFpbGZsb3d8eyJWIjoiMC4wLjAwMDAiLCJQIjoiV=
+2luMzIiLCJBTiI6Ik1haWwiLCJXVCI6Mn0%3D%7C1000&amp;sdata=3DVxH8MofHXoKA7Pvj32=
+VmLMnc5d2n0FkDlnezMj2vPW0%3D&amp;reserved=3D0" originalsrc=3D"http://www.eo=
+n-uk.com/" shash=3D"oUM8UqxBoJ1jcuGgTQ+zytXQ32yHqNBHXQ2qpJsIhfE4lK+9/ZcAwMs=
+QdgE8SdfrmLfc/m+CPiHdLCV4/T0gY0FUG2r3QjvodDN4+rJBXmzmZ2IM5udqXoqKzXlpVI9W2b=
+f3eg9z1bNE88nXM90Ekb+lAcatFWkfxUdSM9QtYQI=3D"><span style=3D"font-size:10.0=
+pt;font-family:&quot;Arial&quot;,sans-serif;color:blue">www.eon-uk.com</spa=
+n></a>
+</span><span style=3D"font-size:10.0pt;font-family:&quot;Arial&quot;,sans-s=
+erif;color:navy;mso-fareast-language:EN-GB"><o:p></o:p></span></p>
+<p class=3D"MsoNormal"><o:p>&nbsp;</o:p></p>
+</div>
+</body>
+</html>
+
+--_000_AM0PR07MB5315E7C33CBFA6433ACCA0DAF7849AM0PR07MB5315eurp_--
