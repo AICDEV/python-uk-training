@@ -1,0 +1,4 @@
+Update calc age:
+    date of birth > 1980
+
+create a function that multiplies score by 3 and round the result to 1 pos after "." and add as new column "Calc Score" to excel

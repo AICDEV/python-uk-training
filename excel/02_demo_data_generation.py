@@ -9,7 +9,7 @@ import pandas as pd
 import numpy as np
 import random
 import string
-
+import uuid
 
 def get_country():
     return random.choice([
@@ -26,23 +26,20 @@ def get_country():
 
 
 def get_uuid():
-    uuid = ""
-    for _ in range(10):
-        uuid += random.choice(string.digits)
-
-    return uuid
+    return str(uuid.uuid4())
 
 
 def get_age():
-    return random.randrange(18, 70)
+    return random.randrange(18, 100)
 
 
 def get_label():
-    return '{}-LBL-{}-{}'.format(random.randrange(1000, 5000), random.choice(string.ascii_uppercase), random.choice(string.ascii_uppercase))
+    return '{}-LBL-{}-{}'.format(random.randrange(1000, 5000), random.choice(string.ascii_uppercase), random.choice(string.digits))
 
 
 test_data = []
-for _ in range(1500):
+
+for _ in range(5000):
     test_data.append([
         get_country(),
         get_uuid(),
@@ -52,4 +49,4 @@ for _ in range(1500):
 
 
 test_df = pd.DataFrame(np.array(test_data), columns=['Country','UUID','Age','Label'])
-test_df.to_excel('./data/generated_test_data.xlsx',sheet_name='Testdata',index=False)
+test_df.to_excel('./data/computed_test_data.xlsx',sheet_name='Testdata',index=False)
