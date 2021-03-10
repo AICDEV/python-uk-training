@@ -1,4 +1,4 @@
-from lib import utils
+from common import utils
 
 
 print(utils.get_env('XMAS_KEY'))
